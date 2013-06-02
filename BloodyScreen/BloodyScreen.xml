@@ -1,11 +1,5 @@
-<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
-	<Script file="BS_Main.lua"/>
-	<Script file="BS_Config.lua"/>
-	<Script file="BS_Init.lua"/>
-	<Script file="Localisation.lua"/>
-	
+﻿<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
 	<Frame name="BS_TextureFrame" parent="UIParent" frameStrata="BACKGROUND"/>
-	
 	<Frame name="BS_ConfigMenu" hidden="true" frameStrata="DIALOG">
 		<Size>
 			<AbsDimension x="150" y="170"/>
@@ -15,22 +9,21 @@
 		</Anchors>
 		<Scripts>
 			<OnLoad>
-				BS_ConfigMenu_Title:SetText("BloodyScreen"..BS_Version);
-				BS_ConfigMenu:SetPoint("CENTER", 0, 0);
-				BS_ConfigMenu_GeneralSettings_Button:SetPoint("CENTER", "BS_ConfigMenu", "TOP", 0, -50);
-				BS_ConfigMenu_GeneralSettings_Button:SetWidth(BS_ConfigMenu:GetWidth()-10);
-				BS_ConfigMenu_Scaling_Button:SetPoint("TOP", "BS_ConfigMenu_GeneralSettings_Button", "BOTTOM", 0, -5);
-				BS_ConfigMenu_Scaling_Button:SetWidth(BS_ConfigMenu:GetWidth()-10);
-				BS_ConfigMenu_DrawingArea_Button:SetPoint("TOP", "BS_ConfigMenu_Scaling_Button", "BOTTOM", 0, -5);
-				BS_ConfigMenu_DrawingArea_Button:SetWidth(BS_ConfigMenu:GetWidth()-10);
-				BS_ConfigMenu_Exit_Button:SetPoint("TOP", "BS_ConfigMenu_DrawingArea_Button", "BOTTOM", 0, -20);
-				BS_ConfigMenu_Exit_Button:SetWidth(BS_ConfigMenu:GetWidth()-10);
+				BS_ConfigMenu_Title:SetText("BloodyScreen"..BS_Version)
+				BS_ConfigMenu:SetPoint("CENTER", 0, 0)
+				BS_ConfigMenu_GeneralSettings_Button:SetPoint("CENTER", "BS_ConfigMenu", "TOP", 0, -50)
+				BS_ConfigMenu_GeneralSettings_Button:SetWidth(BS_ConfigMenu:GetWidth()-10)
+				BS_ConfigMenu_Scaling_Button:SetPoint("TOP", "BS_ConfigMenu_GeneralSettings_Button", "BOTTOM", 0, -5)
+				BS_ConfigMenu_Scaling_Button:SetWidth(BS_ConfigMenu:GetWidth()-10)
+				BS_ConfigMenu_DrawingArea_Button:SetPoint("TOP", "BS_ConfigMenu_Scaling_Button", "BOTTOM", 0, -5)
+				BS_ConfigMenu_DrawingArea_Button:SetWidth(BS_ConfigMenu:GetWidth()-10)
+				BS_ConfigMenu_Exit_Button:SetPoint("TOP", "BS_ConfigMenu_DrawingArea_Button", "BOTTOM", 0, -20)
+				BS_ConfigMenu_Exit_Button:SetWidth(BS_ConfigMenu:GetWidth()-10)
 			</OnLoad>
 			<OnShow>
-				BS_ConfigMenu:Raise();
+				BS_ConfigMenu:Raise()
 			</OnShow>
 		</Scripts>
-		
 		<Backdrop bgFile="Interface\TutorialFrame\TutorialFrameBackground" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
 			<EdgeSize>
 				<AbsValue val="16"/>
@@ -42,7 +35,6 @@
 				<AbsInset left="5" right="5" top="5" bottom="5"/>
 			</BackgroundInsets>
 		</Backdrop>
-		
 		<Layers>
 			<Layer level="OVERLAY">
 				<FontString name="BS_ConfigMenu_Title" inherits="ChatFontNormal">
@@ -56,54 +48,49 @@
 				</FontString>
 			</Layer>
 		</Layers>
-		
 		<Frames>
 			<Button name="BS_ConfigMenu_GeneralSettings_Button" inherits="OptionsButtonTemplate" text="General">
 				<Scripts>
-					<OnLoad>BS_ConfigMenu_GeneralSettings_Button:SetText(BS_String_General);</OnLoad>
+					<OnLoad>BS_ConfigMenu_GeneralSettings_Button:SetText(BS_String_General)</OnLoad>
 					<OnClick>
-						BS_ConfigMenu:Hide();
-						BS_GeneralSettingsFrame:Show();
+						BS_ConfigMenu:Hide()
+						BS_GeneralSettingsFrame:Show()
 					</OnClick>
 				</Scripts>
 			</Button>
-			
 			<Button name="BS_ConfigMenu_Scaling_Button" inherits="OptionsButtonTemplate" text="Scaling">
 				<Scripts>
-					<OnLoad>BS_ConfigMenu_Scaling_Button:SetText(BS_String_Scaling);</OnLoad>
+					<OnLoad>BS_ConfigMenu_Scaling_Button:SetText(BS_String_Scaling)</OnLoad>
 					<OnClick>
-						BS_ConfigMenu:Hide();
-						BS_ScalingFrame:Show();
-					</OnClick>
-				</Scripts>
-			</Button>		
-		
-			<Button name="BS_ConfigMenu_DrawingArea_Button" inherits="OptionsButtonTemplate" text="Drawing area">
-				<Scripts>
-					<OnLoad>BS_ConfigMenu_DrawingArea_Button:SetText(BS_String_DrawingArea);</OnLoad>
-					<OnClick>
-						BS_ConfigMenu:Hide();
-						BS_DrawArea_CornerFrame1:Show(); 
-						BS_DrawArea_CornerFrame2:Show(); 
-						BS_DrawArea_PreviewFrame:Show();
+						BS_ConfigMenu:Hide()
+						BS_ScalingFrame:Show()
 					</OnClick>
 				</Scripts>
 			</Button>
-			
+			<Button name="BS_ConfigMenu_DrawingArea_Button" inherits="OptionsButtonTemplate" text="Drawing area">
+				<Scripts>
+					<OnLoad>BS_ConfigMenu_DrawingArea_Button:SetText(BS_String_DrawingArea)</OnLoad>
+					<OnClick>
+						BS_ConfigMenu:Hide()
+						BS_DrawArea_CornerFrame1:Show() 
+						BS_DrawArea_CornerFrame2:Show() 
+						BS_DrawArea_PreviewFrame:Show()
+					</OnClick>
+				</Scripts>
+			</Button>
 			<Button name="BS_ConfigMenu_Exit_Button" inherits="OptionsButtonTemplate" text="Quit">
 				<Scripts>
-					<OnLoad>BS_ConfigMenu_Exit_Button:SetText(BS_String_Exit);</OnLoad>
+					<OnLoad>BS_ConfigMenu_Exit_Button:SetText(BS_String_Exit)</OnLoad>
 					<OnClick>
-						BS_ConfigMenu:Hide();
-						BS_HideAllTextures();
-						BS_ConfigFrameOpen = false;
-						BS_ApplySettings();
+						BS_ConfigMenu:Hide()
+						BS_HideAllTextures()
+						BS_ConfigFrameOpen = false
+						BS_ApplySettings()
 					</OnClick>
 				</Scripts>
 			</Button>
 		</Frames>
 	</Frame>
-	
 	<Frame name="BS_GeneralSettingsFrame" hidden="true" frameStrata="DIALOG">
 		<Size>
 			<AbsDimension x="550" y="400"/>
@@ -112,33 +99,31 @@
 		<Anchors>
 			<Anchor point="CENTER"></Anchor>
 		</Anchors>
-		
 		<Scripts>
 			<OnLoad>
-				BS_GeneralSettingsFrame_Title:SetText(BS_String_General_Title);
-				BS_GeneralSettingsFrame_Label:SetText(BS_String_General_Trigger);
-				BS_GeneralSettings_Trigger_Criticals:SetPoint("TOP", "BS_GeneralSettings_Trigger_ComboPoints", "BOTTOM", 0, -5);
-				BS_GeneralSettings_Trigger_Criticals_Swipes:SetPoint("TOP", "BS_GeneralSettings_Trigger_Criticals", "BOTTOM", 50, -5);
-				BS_GeneralSettings_Trigger_Criticals_NoTimers:SetPoint("TOP", "BS_GeneralSettings_Trigger_Criticals_Swipes", "BOTTOM", 0, -5);
-				BS_GeneralSettings_Trigger_Criticals_Timers:SetPoint("TOP", "BS_GeneralSettings_Trigger_Criticals_NoTimers", "BOTTOM", 0, -5);
-				BS_ConfigMenu_GeneralSettings_Trigger_Criticals_Timers_SettingsButton:SetPoint("LEFT", "BS_GeneralSettings_Trigger_Criticals_TimersText", "RIGHT", 5, 0);
-				BS_GeneralSettings_Trigger_Criticals_DamageReference:SetPoint("TOP", "BS_GeneralSettings_Trigger_Criticals_Timers", "BOTTOM", 0, -5);
-				BS_GeneralSettings_Trigger_Criticals_DamageReference_SettingsButton:SetPoint("LEFT", "BS_GeneralSettings_Trigger_Criticals_DamageReferenceText", "RIGHT", 5, 0);
-				BS_GeneralSettings_Trigger_Criticals_RangeChecking:SetPoint ("TOP", "BS_GeneralSettings_Trigger_Criticals_DamageReference", "BOTTOM", 0, -5);
-				BS_GeneralSettings_NumberOfTextures:SetPoint("TOPLEFT", "BS_GeneralSettings_Trigger_Criticals_RangeChecking", "BOTTOMLEFT", -50, -5);
-				BS_GeneralSettings_NumberOfTextures_DecreaseButton:SetPoint("LEFT", "BS_GeneralSettings_NumberOfTextures", "RIGHT", 10, 0);
-				BS_GeneralSettings_NumberOfTextures_DecreaseButton:SetWidth(30);
-				BS_GeneralSettings_NumberOfTextures_IncreaseButton:SetPoint("LEFT", "BS_GeneralSettings_NumberOfTextures_DecreaseButton", "RIGHT", 2, 0);
-				BS_GeneralSettings_NumberOfTextures_IncreaseButton:SetWidth(30);
-				BS_GeneralSettings_PVE:SetPoint("TOPLEFT", "BS_GeneralSettings_NumberOfTextures", "BOTTOMLEFT", 0, -5);
-				BS_GeneralSettings_PVP:SetPoint("TOP", "BS_GeneralSettings_PVE", "BOTTOM", 0, -5);
-				BS_GeneralSettings_SaveButton:SetPoint("BOTTOM", "BS_GeneralSettingsFrame", "BOTTOM", 0, 20);
+				BS_GeneralSettingsFrame_Title:SetText(BS_String_General_Title)
+				BS_GeneralSettingsFrame_Label:SetText(BS_String_General_Trigger)
+				BS_GeneralSettings_Trigger_Criticals:SetPoint("TOP", "BS_GeneralSettings_Trigger_ComboPoints", "BOTTOM", 0, -5)
+				BS_GeneralSettings_Trigger_Criticals_Swipes:SetPoint("TOP", "BS_GeneralSettings_Trigger_Criticals", "BOTTOM", 50, -5)
+				BS_GeneralSettings_Trigger_Criticals_NoTimers:SetPoint("TOP", "BS_GeneralSettings_Trigger_Criticals_Swipes", "BOTTOM", 0, -5)
+				BS_GeneralSettings_Trigger_Criticals_Timers:SetPoint("TOP", "BS_GeneralSettings_Trigger_Criticals_NoTimers", "BOTTOM", 0, -5)
+				BS_ConfigMenu_GeneralSettings_Trigger_Criticals_Timers_SettingsButton:SetPoint("LEFT", "BS_GeneralSettings_Trigger_Criticals_TimersText", "RIGHT", 5, 0)
+				BS_GeneralSettings_Trigger_Criticals_DamageReference:SetPoint("TOP", "BS_GeneralSettings_Trigger_Criticals_Timers", "BOTTOM", 0, -5)
+				BS_GeneralSettings_Trigger_Criticals_DamageReference_SettingsButton:SetPoint("LEFT", "BS_GeneralSettings_Trigger_Criticals_DamageReferenceText", "RIGHT", 5, 0)
+				BS_GeneralSettings_Trigger_Criticals_RangeChecking:SetPoint ("TOP", "BS_GeneralSettings_Trigger_Criticals_DamageReference", "BOTTOM", 0, -5)
+				BS_GeneralSettings_NumberOfTextures:SetPoint("TOPLEFT", "BS_GeneralSettings_Trigger_Criticals_RangeChecking", "BOTTOMLEFT", -50, -5)
+				BS_GeneralSettings_NumberOfTextures_DecreaseButton:SetPoint("LEFT", "BS_GeneralSettings_NumberOfTextures", "RIGHT", 10, 0)
+				BS_GeneralSettings_NumberOfTextures_DecreaseButton:SetWidth(30)
+				BS_GeneralSettings_NumberOfTextures_IncreaseButton:SetPoint("LEFT", "BS_GeneralSettings_NumberOfTextures_DecreaseButton", "RIGHT", 2, 0)
+				BS_GeneralSettings_NumberOfTextures_IncreaseButton:SetWidth(30)
+				BS_GeneralSettings_PVE:SetPoint("TOPLEFT", "BS_GeneralSettings_NumberOfTextures", "BOTTOMLEFT", 0, -5)
+				BS_GeneralSettings_PVP:SetPoint("TOP", "BS_GeneralSettings_PVE", "BOTTOM", 0, -5)
+				BS_GeneralSettings_SaveButton:SetPoint("BOTTOM", "BS_GeneralSettingsFrame", "BOTTOM", 0, 20)
 			</OnLoad>
 			<OnShow>
-				BS_GeneralSettings_NumberOfTextures:SetText(BS_String_General_NumberOfTextures..BS_MaximumTextures);
+				BS_GeneralSettings_NumberOfTextures:SetText(BS_String_General_NumberOfTextures..BS_MaximumTextures)
 			</OnShow>
 		</Scripts>
-		
 		<Backdrop bgFile="Interface\TutorialFrame\TutorialFrameBackground" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
 			<EdgeSize>
 				<AbsValue val="16"/>
@@ -150,7 +135,6 @@
 				<AbsInset left="5" right="5" top="5" bottom="5"/>
 			</BackgroundInsets>
 		</Backdrop>
-		
 		<Layers>
 			<Layer level="OVERLAY">
 				<FontString name="BS_GeneralSettingsFrame_Title" inherits="ChatFontNormal">
@@ -162,7 +146,6 @@
 						</Anchor>
 					</Anchors>
 				</FontString>
-				
 				<FontString name="BS_GeneralSettingsFrame_Label" inherits="ChatFontNormal">
 					<Anchors>
 						<Anchor point="TOPLEFT">
@@ -172,22 +155,20 @@
 						</Anchor>
 					</Anchors>
 				</FontString>
-				
 				<FontString name="BS_GeneralSettings_NumberOfTextures" inherits="ChatFontNormal"/>
 			</Layer>
 		</Layers>
-		
 		<Frames>
 			<CheckButton name="BS_GeneralSettings_Trigger_ComboPoints" inherits="OptionsCheckButtonTemplate" checked="false">
 				<Scripts>
 					<OnLoad>
-						getglobal(BS_GeneralSettings_Trigger_ComboPoints:GetName().."Text"):SetText(BS_String_General_ComboPoints);
+						getglobal(BS_GeneralSettings_Trigger_ComboPoints:GetName().."Text"):SetText(BS_String_General_ComboPoints)
 					</OnLoad>
 					<OnClick>
 						if (BS_GeneralSettings_Trigger_ComboPoints:GetChecked() ~= nil) then
-							BS_GeneralSettings_Trigger_Criticals:SetChecked(nil);
+							BS_GeneralSettings_Trigger_Criticals:SetChecked(nil)
 						else
-							BS_GeneralSettings_Trigger_ComboPoints:SetChecked(1);
+							BS_GeneralSettings_Trigger_ComboPoints:SetChecked(1)
 						end
 					</OnClick>
 				</Scripts>
@@ -199,178 +180,161 @@
 					</Anchor>
 				</Anchors>
 			</CheckButton>
-			
 			<CheckButton name="BS_GeneralSettings_Trigger_Criticals" inherits="OptionsCheckButtonTemplate" checked="false">
 				<Scripts>
 					<OnLoad>
-						getglobal(BS_GeneralSettings_Trigger_Criticals:GetName().."Text"):SetText(BS_String_General_Criticals);
+						getglobal(BS_GeneralSettings_Trigger_Criticals:GetName().."Text"):SetText(BS_String_General_Criticals)
 					</OnLoad>
 					<OnClick>
 						if (BS_GeneralSettings_Trigger_Criticals:GetChecked() ~= nil) then
-							BS_GeneralSettings_Trigger_ComboPoints:SetChecked(nil);
+							BS_GeneralSettings_Trigger_ComboPoints:SetChecked(nil)
 						else
-							BS_GeneralSettings_Trigger_Criticals:SetChecked(1);
+							BS_GeneralSettings_Trigger_Criticals:SetChecked(1)
 						end
 					</OnClick>
 				</Scripts>
 			</CheckButton>
-			
 			<CheckButton name="BS_GeneralSettings_Trigger_Criticals_Swipes" inherits="OptionsCheckButtonTemplate" checked="false">
 				<Scripts>
 					<OnLoad>
-						getglobal(BS_GeneralSettings_Trigger_Criticals_Swipes:GetName().."Text"):SetText(BS_String_General_Criticals_Swipes);
+						getglobal(BS_GeneralSettings_Trigger_Criticals_Swipes:GetName().."Text"):SetText(BS_String_General_Criticals_Swipes)
 					</OnLoad>
 				</Scripts>
 			</CheckButton>
-			
 			<CheckButton name="BS_GeneralSettings_Trigger_Criticals_NoTimers" inherits="OptionsCheckButtonTemplate" checked="false">
 				<Scripts>
 					<OnLoad>
-						getglobal(BS_GeneralSettings_Trigger_Criticals_NoTimers:GetName().."Text"):SetText(BS_String_General_Criticals_NoTimers);
+						getglobal(BS_GeneralSettings_Trigger_Criticals_NoTimers:GetName().."Text"):SetText(BS_String_General_Criticals_NoTimers)
 					</OnLoad>
 					<OnClick>
 						if (BS_GeneralSettings_Trigger_Criticals_NoTimers:GetChecked() ~= nil) then
-							BS_GeneralSettings_Trigger_Criticals_Timers:SetChecked(nil);
+							BS_GeneralSettings_Trigger_Criticals_Timers:SetChecked(nil)
 						else
-							BS_GeneralSettings_Trigger_Criticals_NoTimers:SetChecked(1);
+							BS_GeneralSettings_Trigger_Criticals_NoTimers:SetChecked(1)
 						end
 					</OnClick>
 				</Scripts>
 			</CheckButton>
-			
 			<CheckButton name="BS_GeneralSettings_Trigger_Criticals_Timers" inherits="OptionsCheckButtonTemplate" checked="false">
 				<Scripts>
 					<OnLoad>
-						getglobal(BS_GeneralSettings_Trigger_Criticals_Timers:GetName().."Text"):SetText(BS_String_General_Criticals_Timers);
+						getglobal(BS_GeneralSettings_Trigger_Criticals_Timers:GetName().."Text"):SetText(BS_String_General_Criticals_Timers)
 					</OnLoad>
 					<OnClick>
 						if (BS_GeneralSettings_Trigger_Criticals_Timers:GetChecked() ~= nil) then
-							BS_GeneralSettings_Trigger_Criticals_NoTimers:SetChecked(nil);
+							BS_GeneralSettings_Trigger_Criticals_NoTimers:SetChecked(nil)
 						else
-							BS_GeneralSettings_Trigger_Criticals_Timers:SetChecked(1);
+							BS_GeneralSettings_Trigger_Criticals_Timers:SetChecked(1)
 						end
 					</OnClick>
 				</Scripts>
 			</CheckButton>
-			
 			<Button name="BS_ConfigMenu_GeneralSettings_Trigger_Criticals_Timers_SettingsButton" inherits="OptionsButtonTemplate" text="Settings">
 				<Scripts>
-					<OnLoad>BS_ConfigMenu_GeneralSettings_Trigger_Criticals_Timers_SettingsButton:SetText(BS_String_General_Criticals_Timers_Settings);</OnLoad>
+					<OnLoad>BS_ConfigMenu_GeneralSettings_Trigger_Criticals_Timers_SettingsButton:SetText(BS_String_General_Criticals_Timers_Settings)</OnLoad>
 					<OnClick>
-						BS_ApplySettings();
-						BS_GeneralSettingsFrame:Hide();
-						BS_TimersFrame:Show();
+						BS_ApplySettings()
+						BS_GeneralSettingsFrame:Hide()
+						BS_TimersFrame:Show()
 					</OnClick>
 				</Scripts>
 			</Button>
-			
 			<CheckButton name="BS_GeneralSettings_Trigger_Criticals_DamageReference" inherits="OptionsCheckButtonTemplate" checked="false">
 				<Scripts>
 					<OnLoad>
-						getglobal(BS_GeneralSettings_Trigger_Criticals_DamageReference:GetName().."Text"):SetText(BS_String_General_Criticals_DamageReference);
+						getglobal(BS_GeneralSettings_Trigger_Criticals_DamageReference:GetName().."Text"):SetText(BS_String_General_Criticals_DamageReference)
 					</OnLoad>
 				</Scripts>
 			</CheckButton>
-			
 			<Button name="BS_GeneralSettings_Trigger_Criticals_DamageReference_SettingsButton" inherits="OptionsButtonTemplate" text="Settings">
 				<Scripts>
-					<OnLoad>BS_GeneralSettings_Trigger_Criticals_DamageReference_SettingsButton:SetText(BS_String_General_Criticals_DamageReference_Settings);</OnLoad>
+					<OnLoad>BS_GeneralSettings_Trigger_Criticals_DamageReference_SettingsButton:SetText(BS_String_General_Criticals_DamageReference_Settings)</OnLoad>
 					<OnClick>
-						BS_ApplySettings();
-						BS_GeneralSettingsFrame:Hide();
-						BS_DamageReferenceFrame:Show();
+						BS_ApplySettings()
+						BS_GeneralSettingsFrame:Hide()
+						BS_DamageReferenceFrame:Show()
 					</OnClick>
 				</Scripts>
 			</Button>
-			
 			<CheckButton name="BS_GeneralSettings_Trigger_Criticals_RangeChecking" inherits="OptionsCheckButtonTemplate" checked="false">
 				<Scripts>
 					<OnLoad>
-						getglobal(BS_GeneralSettings_Trigger_Criticals_RangeChecking:GetName().."Text"):SetText(BS_String_General_Criticals_RangeCheck);
+						getglobal(BS_GeneralSettings_Trigger_Criticals_RangeChecking:GetName().."Text"):SetText(BS_String_General_Criticals_RangeCheck)
 					</OnLoad>
 				</Scripts>
 			</CheckButton>
-			
 			<Button name="BS_GeneralSettings_NumberOfTextures_DecreaseButton" inherits="OptionsButtonTemplate" text="-">
 				<Scripts>
 					<OnLoad></OnLoad>
 					<OnClick>
-						BS_MaximumTextures=math.max(BS_MaximumTextures-1,5);
-						BS_GeneralSettings_NumberOfTextures:SetText(BS_String_General_NumberOfTextures..BS_MaximumTextures);
+						BS_MaximumTextures=math.max(BS_MaximumTextures-1,5)
+						BS_GeneralSettings_NumberOfTextures:SetText(BS_String_General_NumberOfTextures..BS_MaximumTextures)
 						if (BS_Textures[BS_MaximumTextures] ~= nil ) then
-							BS_Textures[BS_MaximumTextures]:Hide();
-							BS_Textures[BS_MaximumTextures] = nil;
+							BS_Textures[BS_MaximumTextures]:Hide()
+							BS_Textures[BS_MaximumTextures] = nil
 						end
 					</OnClick>
 				</Scripts>
 			</Button>
-			
 			<Button name="BS_GeneralSettings_NumberOfTextures_IncreaseButton" inherits="OptionsButtonTemplate" text="+">
 				<Scripts>
 					<OnLoad></OnLoad>
 					<OnClick>
-						BS_MaximumTextures=BS_MaximumTextures+1;
-						BS_CreateTextures();
-						BS_GeneralSettings_NumberOfTextures:SetText(BS_String_General_NumberOfTextures..BS_MaximumTextures);
-						BS_ShowAllTextures();
+						BS_MaximumTextures=BS_MaximumTextures+1
+						BS_CreateTextures()
+						BS_GeneralSettings_NumberOfTextures:SetText(BS_String_General_NumberOfTextures..BS_MaximumTextures)
+						BS_ShowAllTextures()
 					</OnClick>
 				</Scripts>
 			</Button>
-			
 			<CheckButton name="BS_GeneralSettings_PVP" inherits="OptionsCheckButtonTemplate" checked="false">
 				<Scripts>
 					<OnLoad>
-						getglobal(BS_GeneralSettings_PVP:GetName().."Text"):SetText(BS_String_General_PVP);
+						getglobal(BS_GeneralSettings_PVP:GetName().."Text"):SetText(BS_String_General_PVP)
 					</OnLoad>
 				</Scripts>
 			</CheckButton>
-			
 			<CheckButton name="BS_GeneralSettings_PVE" inherits="OptionsCheckButtonTemplate" checked="false">
 				<Scripts>
 					<OnLoad>
-						getglobal(BS_GeneralSettings_PVE:GetName().."Text"):SetText(BS_String_General_PVE);
+						getglobal(BS_GeneralSettings_PVE:GetName().."Text"):SetText(BS_String_General_PVE)
 					</OnLoad>
 				</Scripts>
 			</CheckButton>
-			
 			<Button name="BS_GeneralSettings_SaveButton" inherits="OptionsButtonTemplate" text="Settings">
 				<Scripts>
-					<OnLoad>BS_GeneralSettings_SaveButton:SetText(BS_String_SaveSettings);</OnLoad>
+					<OnLoad>BS_GeneralSettings_SaveButton:SetText(BS_String_SaveSettings)</OnLoad>
 					<OnClick>
-						BS_ApplySettings();
-						BS_GeneralSettingsFrame:Hide();
-						BS_ConfigMenu:Show();
+						BS_ApplySettings()
+						BS_GeneralSettingsFrame:Hide()
+						BS_ConfigMenu:Show()
 					</OnClick>
 				</Scripts>
 			</Button>
 		</Frames>
 	</Frame>
-	
 	<Frame name="BS_TimersFrame" hidden="true" frameStrata="DIALOG">
 		<Size>
 			<AbsDimension x="350" y="150"/>
-		</Size>	
-		
+		</Size>
 		<Anchors>
 			<Anchor point="CENTER"></Anchor>
 		</Anchors>
-		
 		<Scripts>
 			<OnLoad>
-				BS_TimersFrame_Title:SetText(BS_String_Timers_Title);
-				BS_Timers_Runtime_DecreaseButton:SetPoint("LEFT", "BS_Timers_Runtime", "RIGHT", 10, 0);
-				BS_Timers_Runtime_DecreaseButton:SetWidth(30);
-				BS_Timers_Runtime_IncreaseButton:SetPoint("LEFT", "BS_Timers_Runtime_DecreaseButton", "RIGHT", 2, 0);
-				BS_Timers_Runtime_IncreaseButton:SetWidth(30);
-				BS_Timers_GlobalTimer:SetPoint("TOPLEFT", "BS_Timers_Runtime", "BOTTOMLEFT", 0, -10);
-				BS_Timers_Separated:SetPoint("TOP", "BS_Timers_GlobalTimer", "BOTTOM", 0, 5);
-				BS_Timers_SaveButton:SetPoint("BOTTOM", "BS_TimersFrame", "BOTTOM", 0, 20);
+				BS_TimersFrame_Title:SetText(BS_String_Timers_Title)
+				BS_Timers_Runtime_DecreaseButton:SetPoint("LEFT", "BS_Timers_Runtime", "RIGHT", 10, 0)
+				BS_Timers_Runtime_DecreaseButton:SetWidth(30)
+				BS_Timers_Runtime_IncreaseButton:SetPoint("LEFT", "BS_Timers_Runtime_DecreaseButton", "RIGHT", 2, 0)
+				BS_Timers_Runtime_IncreaseButton:SetWidth(30)
+				BS_Timers_GlobalTimer:SetPoint("TOPLEFT", "BS_Timers_Runtime", "BOTTOMLEFT", 0, -10)
+				BS_Timers_Separated:SetPoint("TOP", "BS_Timers_GlobalTimer", "BOTTOM", 0, 5)
+				BS_Timers_SaveButton:SetPoint("BOTTOM", "BS_TimersFrame", "BOTTOM", 0, 20)
 			</OnLoad>
 			<OnShow>
-				BS_Timers_Runtime:SetText(BS_String_Timers_Runtime..BS_Timer_RunTime..BS_String_Timers_Runtime_Unit);
+				BS_Timers_Runtime:SetText(BS_String_Timers_Runtime..BS_Timer_RunTime..BS_String_Timers_Runtime_Unit)
 			</OnShow>
 		</Scripts>
-		
 		<Backdrop bgFile="Interface\TutorialFrame\TutorialFrameBackground" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
 			<EdgeSize>
 				<AbsValue val="16"/>
@@ -382,7 +346,6 @@
 				<AbsInset left="5" right="5" top="5" bottom="5"/>
 			</BackgroundInsets>
 		</Backdrop>
-		
 		<Layers>
 			<Layer level="OVERLAY">
 				<FontString name="BS_TimersFrame_Title" inherits="ChatFontNormal">
@@ -394,7 +357,6 @@
 						</Anchor>
 					</Anchors>
 				</FontString>
-				
 				<FontString name="BS_Timers_Runtime" inherits="ChatFontNormal">
 					<Anchors>
 						<Anchor point="TOPLEFT">
@@ -406,38 +368,35 @@
 				</FontString>
 			</Layer>
 		</Layers>
-		
 		<Frames>
 			<Button name="BS_Timers_Runtime_DecreaseButton" inherits="OptionsButtonTemplate" text="-">
 				<Scripts>
 					<OnLoad></OnLoad>
 					<OnClick>
-						BS_Timer_RunTime=math.max(1,BS_Timer_RunTime-1);
-						BS_Timers_Runtime:SetText(BS_String_Timers_Runtime..BS_Timer_RunTime..BS_String_Timers_Runtime_Unit);
+						BS_Timer_RunTime=math.max(1,BS_Timer_RunTime-1)
+						BS_Timers_Runtime:SetText(BS_String_Timers_Runtime..BS_Timer_RunTime..BS_String_Timers_Runtime_Unit)
 					</OnClick>
 				</Scripts>
 			</Button>
-			
 			<Button name="BS_Timers_Runtime_IncreaseButton" inherits="OptionsButtonTemplate" text="+">
 				<Scripts>
 					<OnLoad></OnLoad>
 					<OnClick>
-						BS_Timer_RunTime=BS_Timer_RunTime+1;
-						BS_Timers_Runtime:SetText(BS_String_Timers_Runtime..BS_Timer_RunTime..BS_String_Timers_Runtime_Unit);
+						BS_Timer_RunTime=BS_Timer_RunTime+1
+						BS_Timers_Runtime:SetText(BS_String_Timers_Runtime..BS_Timer_RunTime..BS_String_Timers_Runtime_Unit)
 					</OnClick>
 				</Scripts>
-			</Button>			
-			
+			</Button>
 			<CheckButton name="BS_Timers_GlobalTimer" inherits="OptionsCheckButtonTemplate" checked="false">
 				<Scripts>
 					<OnLoad>
-						getglobal(BS_Timers_GlobalTimer:GetName().."Text"):SetText(BS_String_Timers_GlobalTimer);
+						getglobal(BS_Timers_GlobalTimer:GetName().."Text"):SetText(BS_String_Timers_GlobalTimer)
 					</OnLoad>
 					<OnClick>
 						if (BS_Timers_GlobalTimer:GetChecked() ~= nil) then
-							BS_Timers_Separated:SetChecked(nil);
+							BS_Timers_Separated:SetChecked(nil)
 						else
-							BS_Timers_GlobalTimer:SetChecked(1);
+							BS_Timers_GlobalTimer:SetChecked(1)
 						end
 					</OnClick>
 				</Scripts>
@@ -449,90 +408,86 @@
 					</Anchor>
 				</Anchors>
 			</CheckButton>
-			
 			<CheckButton name="BS_Timers_Separated" inherits="OptionsCheckButtonTemplate" checked="true">
 				<Scripts>
 					<OnLoad>
-						getglobal(BS_Timers_Separated:GetName().."Text"):SetText(BS_String_Timers_Separated);
+						getglobal(BS_Timers_Separated:GetName().."Text"):SetText(BS_String_Timers_Separated)
 					</OnLoad>
 					<OnClick>
 						if (BS_Timers_Separated:GetChecked() ~= nil) then
-							BS_Timers_GlobalTimer:SetChecked(nil);
+							BS_Timers_GlobalTimer:SetChecked(nil)
 						else
-							BS_Timers_Separated:SetChecked(1);
+							BS_Timers_Separated:SetChecked(1)
 						end
 					</OnClick>
 				</Scripts>
 			</CheckButton>
-					
 			<Button name="BS_Timers_SaveButton" inherits="OptionsButtonTemplate" text="Settings">
 				<Scripts>
-					<OnLoad>BS_Timers_SaveButton:SetText(BS_String_SaveSettings);</OnLoad>
+					<OnLoad>BS_Timers_SaveButton:SetText(BS_String_SaveSettings)</OnLoad>
 					<OnClick>
-						BS_ApplySettings();
-						BS_TimersFrame:Hide();
-						BS_GeneralSettingsFrame:Show();
+						BS_ApplySettings()
+						BS_TimersFrame:Hide()
+						BS_GeneralSettingsFrame:Show()
 					</OnClick>
 				</Scripts>
 			</Button>
 		</Frames>
 	</Frame>
-	
 	<Frame name="BS_ScalingFrame" hidden="true" frameStrata="DIALOG">
 		<Size>
 			<AbsDimension x="250" y="150"/>
-		</Size>			
+		</Size>
 		<Scripts>
 			<OnLoad>
-				BS_ScalingFrame:ClearAllPoints();
-				BS_ScalingFrame:SetPoint("BOTTOM", "UIParent", "CENTER", 0,0);
-				BS_ScalingFrame_Title:SetText(BS_String_Scaling_Title);
-				BS_Scaling_Label1:SetText(BS_String_Scaling_Size);
-				BS_Scaling_DecreaseButton1:SetPoint("LEFT", "BS_Scaling_Label1", "RIGHT", 10, 0);
-				BS_Scaling_DecreaseButton1:SetWidth(30);
-				BS_Scaling_IncreaseButton1:SetPoint("LEFT", "BS_Scaling_DecreaseButton1", "RIGHT", 2, 0);
-				BS_Scaling_IncreaseButton1:SetWidth(30);
-				BS_Scaling_Label2:SetText(BS_String_Scaling_MinimalSize);
-				BS_Scaling_Label2:SetPoint("TOPLEFT", "BS_Scaling_Label1", "BOTTOMLEFT", 0, -10);
-				BS_Scaling_DecreaseButton2:SetPoint("LEFT", "BS_Scaling_Label2", "RIGHT", 10, 0);
-				BS_Scaling_DecreaseButton2:SetWidth(30);
-				BS_Scaling_IncreaseButton2:SetPoint("LEFT", "BS_Scaling_DecreaseButton2", "RIGHT", 2, 0);
-				BS_Scaling_IncreaseButton2:SetWidth(30);
-				BS_Scaling_SaveButton:SetPoint("BOTTOM", "BS_ScalingFrame", "BOTTOM", 0, 20);
+				BS_ScalingFrame:ClearAllPoints()
+				BS_ScalingFrame:SetPoint("BOTTOM", "UIParent", "CENTER", 0,0)
+				BS_ScalingFrame_Title:SetText(BS_String_Scaling_Title)
+				BS_Scaling_Label1:SetText(BS_String_Scaling_Size)
+				BS_Scaling_DecreaseButton1:SetPoint("LEFT", "BS_Scaling_Label1", "RIGHT", 10, 0)
+				BS_Scaling_DecreaseButton1:SetWidth(30)
+				BS_Scaling_IncreaseButton1:SetPoint("LEFT", "BS_Scaling_DecreaseButton1", "RIGHT", 2, 0)
+				BS_Scaling_IncreaseButton1:SetWidth(30)
+				BS_Scaling_Label2:SetText(BS_String_Scaling_MinimalSize)
+				BS_Scaling_Label2:SetPoint("TOPLEFT", "BS_Scaling_Label1", "BOTTOMLEFT", 0, -10)
+				BS_Scaling_DecreaseButton2:SetPoint("LEFT", "BS_Scaling_Label2", "RIGHT", 10, 0)
+				BS_Scaling_DecreaseButton2:SetWidth(30)
+				BS_Scaling_IncreaseButton2:SetPoint("LEFT", "BS_Scaling_DecreaseButton2", "RIGHT", 2, 0)
+				BS_Scaling_IncreaseButton2:SetWidth(30)
+				BS_Scaling_SaveButton:SetPoint("BOTTOM", "BS_ScalingFrame", "BOTTOM", 0, 20)
 			</OnLoad>
 			<OnShow>
-				BS_MinimalScalingFactor=math.min(BS_MinimalScalingFactor, BS_MaximalScalingFactor);
+				BS_MinimalScalingFactor=math.min(BS_MinimalScalingFactor, BS_MaximalScalingFactor)
 				if (not BS_DamageReference) then
-					BS_Scaling_Label1:SetText(BS_String_Scaling_Size);
-					BS_Scaling_Label2:Hide();
-					BS_Scaling_DecreaseButton2:Hide();
-					BS_Scaling_IncreaseButton2:Hide();
-					BS_HideAllTextures();
-					BS_Textures[0]:Show();
-					BS_Textures[0]:ClearAllPoints();
-					BS_Textures[0]:SetPoint("TOP", "BS_ScalingFrame", "BOTTOM", 0, -10);
-					BS_Textures[0]:SetWidth(266*BS_MaximalScalingFactor);
-					BS_Textures[0]:SetHeight(266*BS_MaximalScalingFactor);
+					BS_Scaling_Label1:SetText(BS_String_Scaling_Size)
+					BS_Scaling_Label2:Hide()
+					BS_Scaling_DecreaseButton2:Hide()
+					BS_Scaling_IncreaseButton2:Hide()
+					BS_HideAllTextures()
+					BS_Textures[0]:Show()
+					BS_Textures[0]:ClearAllPoints()
+					BS_Textures[0]:SetPoint("TOP", "BS_ScalingFrame", "BOTTOM", 0, -10)
+					BS_Textures[0]:SetWidth(266*BS_MaximalScalingFactor)
+					BS_Textures[0]:SetHeight(266*BS_MaximalScalingFactor)
 				else
-					BS_Scaling_Label1:SetText(BS_String_Scaling_MaximalSize);
-					BS_Scaling_Label2:Show();
-					BS_Scaling_DecreaseButton2:Show();
-					BS_Scaling_IncreaseButton2:Show();
-					BS_HideAllTextures();
-					BS_Textures[0]:Show();
-					BS_Textures[0]:ClearAllPoints();
-					BS_Textures[0]:SetPoint("TOPLEFT", "BS_ScalingFrame", "BOTTOM", 0, -10);	
-					BS_Textures[0]:SetWidth(266*BS_MaximalScalingFactor);
-					BS_Textures[0]:SetHeight(266*BS_MaximalScalingFactor);
-					BS_Textures[1]:Show();
-					BS_Textures[1]:ClearAllPoints();
-					BS_Textures[1]:SetPoint("TOPRIGHT", "BS_ScalingFrame", "BOTTOM", 0, -10);				
-					BS_Textures[1]:SetWidth(266*BS_MinimalScalingFactor);
-					BS_Textures[1]:SetHeight(266*BS_MinimalScalingFactor);
+					BS_Scaling_Label1:SetText(BS_String_Scaling_MaximalSize)
+					BS_Scaling_Label2:Show()
+					BS_Scaling_DecreaseButton2:Show()
+					BS_Scaling_IncreaseButton2:Show()
+					BS_HideAllTextures()
+					BS_Textures[0]:Show()
+					BS_Textures[0]:ClearAllPoints()
+					BS_Textures[0]:SetPoint("TOPLEFT", "BS_ScalingFrame", "BOTTOM", 0, -10)	
+					BS_Textures[0]:SetWidth(266*BS_MaximalScalingFactor)
+					BS_Textures[0]:SetHeight(266*BS_MaximalScalingFactor)
+					BS_Textures[1]:Show()
+					BS_Textures[1]:ClearAllPoints()
+					BS_Textures[1]:SetPoint("TOPRIGHT", "BS_ScalingFrame", "BOTTOM", 0, -10)
+					BS_Textures[1]:SetWidth(266*BS_MinimalScalingFactor)
+					BS_Textures[1]:SetHeight(266*BS_MinimalScalingFactor)
 				end
 			</OnShow>
 		</Scripts>
-		
 		<Backdrop bgFile="Interface\TutorialFrame\TutorialFrameBackground" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
 			<EdgeSize>
 				<AbsValue val="16"/>
@@ -544,7 +499,6 @@
 				<AbsInset left="5" right="5" top="5" bottom="5"/>
 			</BackgroundInsets>
 		</Backdrop>
-		
 		<Layers>
 			<Layer level="OVERLAY">
 				<FontString name="BS_ScalingFrame_Title" inherits="ChatFontNormal">
@@ -556,7 +510,6 @@
 						</Anchor>
 					</Anchors>
 				</FontString>
-				
 				<FontString name="BS_Scaling_Label1" inherits="ChatFontNormal">
 					<Anchors>
 						<Anchor point="TOPLEFT">
@@ -566,91 +519,83 @@
 						</Anchor>
 					</Anchors>
 				</FontString>
-				
 				<FontString name="BS_Scaling_Label2" inherits="ChatFontNormal" hidden="true"/>
 			</Layer>
 		</Layers>
-		
 		<Frames>
 			<Button name="BS_Scaling_DecreaseButton1" inherits="OptionsButtonTemplate" text="-">
 				<Scripts>
 					<OnLoad></OnLoad>
 					<OnClick>
-						BS_MaximalScalingFactor=math.max(0.1, BS_MaximalScalingFactor-0.1);
-						BS_MinimalScalingFactor=math.min(BS_MinimalScalingFactor, BS_MaximalScalingFactor);
-						BS_Textures[0]:SetWidth(266*BS_MaximalScalingFactor);
-						BS_Textures[0]:SetHeight(266*BS_MaximalScalingFactor);
-						BS_Textures[1]:SetWidth(266*BS_MinimalScalingFactor);
-						BS_Textures[1]:SetHeight(266*BS_MinimalScalingFactor);
+						BS_MaximalScalingFactor=math.max(0.1, BS_MaximalScalingFactor-0.1)
+						BS_MinimalScalingFactor=math.min(BS_MinimalScalingFactor, BS_MaximalScalingFactor)
+						BS_Textures[0]:SetWidth(266*BS_MaximalScalingFactor)
+						BS_Textures[0]:SetHeight(266*BS_MaximalScalingFactor)
+						BS_Textures[1]:SetWidth(266*BS_MinimalScalingFactor)
+						BS_Textures[1]:SetHeight(266*BS_MinimalScalingFactor)
 					</OnClick>
 				</Scripts>
 			</Button>
-			
 			<Button name="BS_Scaling_IncreaseButton1" inherits="OptionsButtonTemplate" text="+">
 				<Scripts>
 					<OnLoad></OnLoad>
 					<OnClick>
-						BS_MaximalScalingFactor=math.min(BS_MaximalScalingFactor+0.1, math.floor(math.min(BS_TextureFrame:GetHeight(),BS_TextureFrame:GetWidth())/26.6)/10.0);
-						BS_Textures[0]:SetWidth(266*BS_MaximalScalingFactor);
-						BS_Textures[0]:SetHeight(266*BS_MaximalScalingFactor);
+						BS_MaximalScalingFactor=math.min(BS_MaximalScalingFactor+0.1, math.floor(math.min(BS_TextureFrame:GetHeight(),BS_TextureFrame:GetWidth())/26.6)/10.0)
+						BS_Textures[0]:SetWidth(266*BS_MaximalScalingFactor)
+						BS_Textures[0]:SetHeight(266*BS_MaximalScalingFactor)
 					</OnClick>
 				</Scripts>
-			</Button>		
-
+			</Button>
 			<Button name="BS_Scaling_DecreaseButton2" inherits="OptionsButtonTemplate" text="-" hidden="true">
 				<Scripts>
 					<OnLoad></OnLoad>
 					<OnClick>
-						BS_MinimalScalingFactor=math.max(0.1, BS_MinimalScalingFactor-0.1);
-						BS_Textures[1]:SetWidth(266*BS_MinimalScalingFactor);
-						BS_Textures[1]:SetHeight(266*BS_MinimalScalingFactor);
+						BS_MinimalScalingFactor=math.max(0.1, BS_MinimalScalingFactor-0.1)
+						BS_Textures[1]:SetWidth(266*BS_MinimalScalingFactor)
+						BS_Textures[1]:SetHeight(266*BS_MinimalScalingFactor)
 					</OnClick>
 				</Scripts>
 			</Button>
-			
 			<Button name="BS_Scaling_IncreaseButton2" inherits="OptionsButtonTemplate" text="+" hidden="true">
 				<Scripts>
 					<OnLoad></OnLoad>
 					<OnClick>
-						BS_MinimalScalingFactor=math.min(BS_MinimalScalingFactor+0.1, BS_MaximalScalingFactor);
-						BS_Textures[1]:SetWidth(266*BS_MinimalScalingFactor);
-						BS_Textures[1]:SetHeight(266*BS_MinimalScalingFactor);
+						BS_MinimalScalingFactor=math.min(BS_MinimalScalingFactor+0.1, BS_MaximalScalingFactor)
+						BS_Textures[1]:SetWidth(266*BS_MinimalScalingFactor)
+						BS_Textures[1]:SetHeight(266*BS_MinimalScalingFactor)
 					</OnClick>
 				</Scripts>
-			</Button>				
-					
+			</Button>
 			<Button name="BS_Scaling_SaveButton" inherits="OptionsButtonTemplate" text="Settings">
 				<Scripts>
-					<OnLoad>BS_Scaling_SaveButton:SetText(BS_String_SaveSettings);</OnLoad>
+					<OnLoad>BS_Scaling_SaveButton:SetText(BS_String_SaveSettings)</OnLoad>
 					<OnClick>
-						BS_HideAllTextures();
-						BS_ScalingFrame:Hide();
-						BS_ShowAllTextures();
-						BS_ConfigMenu:Show();
+						BS_HideAllTextures()
+						BS_ScalingFrame:Hide()
+						BS_ShowAllTextures()
+						BS_ConfigMenu:Show()
 					</OnClick>
 				</Scripts>
 			</Button>
 		</Frames>
 	</Frame>
-
-	<Frame name="BS_DrawArea_PreviewFrame" hidden="true" frameStrata="DIALOG">		
+	<Frame name="BS_DrawArea_PreviewFrame" hidden="true" frameStrata="DIALOG">
 		<Scripts>
 			<OnLoad>
-				BS_DrawArea_SaveButton:SetPoint("BOTTOM", "BS_DrawArea_PreviewFrame", "BOTTOM", 0, 20);
-				BS_DrawArea_PreviewFrame_Title:SetText(BS_String_DrawingArea_Title);
-				BS_DrawArea_PreviewFrame_Label:SetPoint("LEFT", "BS_DrawArea_PreviewFrame", "LEFT", 20, 0);
-				BS_DrawArea_PreviewFrame_Label:SetPoint("RIGHT", "BS_DrawArea_PreviewFrame", "RIGHT", -20, 0);
-				BS_DrawArea_PreviewFrame_Label:SetText(BS_String_DrawingArea_Instruction);
+				BS_DrawArea_SaveButton:SetPoint("BOTTOM", "BS_DrawArea_PreviewFrame", "BOTTOM", 0, 20)
+				BS_DrawArea_PreviewFrame_Title:SetText(BS_String_DrawingArea_Title)
+				BS_DrawArea_PreviewFrame_Label:SetPoint("LEFT", "BS_DrawArea_PreviewFrame", "LEFT", 20, 0)
+				BS_DrawArea_PreviewFrame_Label:SetPoint("RIGHT", "BS_DrawArea_PreviewFrame", "RIGHT", -20, 0)
+				BS_DrawArea_PreviewFrame_Label:SetText(BS_String_DrawingArea_Instruction)
 			</OnLoad>
 			<OnShow>
-				BS_AjustTextureFrame();
-				BS_HideAllTextures();
+				BS_AjustTextureFrame()
+				BS_HideAllTextures()
 			</OnShow>
 			<OnUpdate>
-				BS_AjustTextureFrame();
+				BS_AjustTextureFrame()
 			</OnUpdate>
 		</Scripts>
-		
 		<Backdrop bgFile="Interface\TutorialFrame\TutorialFrameBackground" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
 			<EdgeSize>
 				<AbsValue val="16"/>
@@ -662,7 +607,6 @@
 				<AbsInset left="5" right="5" top="5" bottom="5"/>
 			</BackgroundInsets>
 		</Backdrop>
-		
 		<Layers>
 			<Layer level="OVERLAY">
 				<FontString name="BS_DrawArea_PreviewFrame_Title" inherits="ChatFontNormal">
@@ -674,122 +618,114 @@
 						</Anchor>
 					</Anchors>
 				</FontString>
-				
 				<FontString name="BS_DrawArea_PreviewFrame_Label" inherits="ChatFontNormal"/>
 			</Layer>
 		</Layers>
-		
 		<Frames>
 			<Button name="BS_DrawArea_SaveButton" inherits="OptionsButtonTemplate" text="Settings">
 				<Scripts>
-					<OnLoad>BS_DrawArea_SaveButton:SetText(BS_String_SaveSettings);</OnLoad>
+					<OnLoad>BS_DrawArea_SaveButton:SetText(BS_String_SaveSettings)</OnLoad>
 					<OnClick>
-						BS_DrawArea_PreviewFrame:Hide();
-						BS_DrawArea_CornerFrame1:Hide();
-						BS_DrawArea_CornerFrame2:Hide();
-						BS_ConfigMenu:Show();
-						BS_ShowAllTextures();
+						BS_DrawArea_PreviewFrame:Hide()
+						BS_DrawArea_CornerFrame1:Hide()
+						BS_DrawArea_CornerFrame2:Hide()
+						BS_ConfigMenu:Show()
+						BS_ShowAllTextures()
 					</OnClick>
 				</Scripts>
 			</Button>
 		</Frames>
 	</Frame>
-	
 	<Frame name="BS_DrawArea_CornerFrame1" movable="true" hidden="true" frameStrata="DIALOG">
 		<Size>
 			<AbsDimension x="5" y="5"/>
-		</Size>	
+		</Size>
 		<Anchors>
 			<Anchor point="CENTER">
 				<Offset>
 					<AbsDimension x="-250" y="250"/>
 				</Offset>
 			</Anchor>
-		</Anchors>	
+		</Anchors>
 		<Scripts>
 			<OnLoad>
-				BS_DrawArea_CornerFrame1:RegisterForDrag("LeftButton");
-				BS_DrawArea_Corner1_BackgroundTexture = BS_DrawArea_CornerFrame1:CreateTexture();
-				BS_DrawArea_Corner1_BackgroundTexture:SetAllPoints(BS_DrawArea_CornerFrame1);
-				BS_DrawArea_Corner1_BackgroundTexture:SetTexture(1,1,1);
-				BS_DrawArea_Corner1_BackgroundTexture:Show();
+				BS_DrawArea_CornerFrame1:RegisterForDrag("LeftButton")
+				BS_DrawArea_Corner1_BackgroundTexture = BS_DrawArea_CornerFrame1:CreateTexture()
+				BS_DrawArea_Corner1_BackgroundTexture:SetAllPoints(BS_DrawArea_CornerFrame1)
+				BS_DrawArea_Corner1_BackgroundTexture:SetTexture(1,1,1)
+				BS_DrawArea_Corner1_BackgroundTexture:Show()
 			</OnLoad>
 			<OnShow>
 			</OnShow>
-			<OnDragStart>		
-				BS_DrawArea_CornerFrame1:StartMoving();
+			<OnDragStart>
+				BS_DrawArea_CornerFrame1:StartMoving()
 			</OnDragStart>
 			<OnDragStop>
-				BS_DrawArea_CornerFrame1:StopMovingOrSizing();
+				BS_DrawArea_CornerFrame1:StopMovingOrSizing()
 			</OnDragStop>
 		</Scripts>
 	</Frame>
-	
 	<Frame name="BS_DrawArea_CornerFrame2" movable="true" hidden="true" frameStrata="DIALOG">
 		<Size>
 			<AbsDimension x="5" y="5"/>
-		</Size>			
+		</Size>
 		<Anchors>
 			<Anchor point="CENTER">
 				<Offset>
 					<AbsDimension x="250" y="-250"/>
-				</Offset>			
+				</Offset>
 			</Anchor>
 		</Anchors>
 		<Scripts>
 			<OnLoad>
-				BS_DrawArea_CornerFrame2:RegisterForDrag("LeftButton");
-				BS_DrawArea_Corner2_BackgroundTexture = BS_DrawArea_CornerFrame2:CreateTexture();
-				BS_DrawArea_Corner2_BackgroundTexture:SetAllPoints(BS_DrawArea_CornerFrame2);
-				BS_DrawArea_Corner2_BackgroundTexture:SetTexture(1,1,1);
-				BS_DrawArea_Corner2_BackgroundTexture:Show();
+				BS_DrawArea_CornerFrame2:RegisterForDrag("LeftButton")
+				BS_DrawArea_Corner2_BackgroundTexture = BS_DrawArea_CornerFrame2:CreateTexture()
+				BS_DrawArea_Corner2_BackgroundTexture:SetAllPoints(BS_DrawArea_CornerFrame2)
+				BS_DrawArea_Corner2_BackgroundTexture:SetTexture(1,1,1)
+				BS_DrawArea_Corner2_BackgroundTexture:Show()
 			</OnLoad>
 			<OnShow>
 			</OnShow>
-			<OnDragStart>		
-				BS_DrawArea_CornerFrame2:StartMoving();
+			<OnDragStart>
+				BS_DrawArea_CornerFrame2:StartMoving()
 			</OnDragStart>
 			<OnDragStop>
-				BS_DrawArea_CornerFrame2:StopMovingOrSizing();
+				BS_DrawArea_CornerFrame2:StopMovingOrSizing()
 			</OnDragStop>
 		</Scripts>
 	</Frame>
-	
 	<Frame name="BS_DamageReferenceFrame" hidden="true" frameStrata="DIALOG">
 		<Size>
 			<AbsDimension x="500" y="200"/>
-		</Size>			
-		
+		</Size>
 		<Anchors>
 			<Anchor point="CENTER"></Anchor>
 		</Anchors>
-		
 		<Scripts>
 			<OnLoad>
-				BS_DamageReferenceFrame_Title:SetText(BS_String_DamageReference_Title);
-				BS_DamageReference_MaximalValue_DecreaseButton:SetPoint("LEFT", "BS_DamageReferenceFrame_Label1", "RIGHT", 10, 0);
-				BS_DamageReference_MaximalValue_DecreaseButton:SetWidth(30);
-				BS_DamageReference_MaximalValue_IncreaseButton:SetPoint("LEFT", "BS_DamageReference_MaximalValue_DecreaseButton", "RIGHT", 2, 0);
-				BS_DamageReference_MaximalValue_IncreaseButton:SetWidth(30);
-				BS_DamageReferenceFrame_Label2:SetPoint("TOPLEFT", "BS_DamageReferenceFrame_Label1", "BOTTOMLEFT", 0, -5);
-				BS_DamageReference_AverageValue_DecreaseButton:SetPoint("LEFT", "BS_DamageReferenceFrame_Label2", "RIGHT", 10, 0);
-				BS_DamageReference_AverageValue_DecreaseButton:SetWidth(30);
-				BS_DamageReference_AverageValue_IncreaseButton:SetPoint("LEFT", "BS_DamageReference_AverageValue_DecreaseButton", "RIGHT", 2, 0);
-				BS_DamageReference_AverageValue_IncreaseButton:SetWidth(30);
-				BS_DamageReferenceFrame_Label3:SetText(BS_String_DamageReference_DamageMeasurement);
-				BS_DamageReferenceFrame_Label3:SetPoint("TOPLEFT", "BS_DamageReferenceFrame_Label2", "BOTTOMLEFT", 0, -15);
-				BS_DamageReference_MeasurementButton:SetPoint("LEFT", "BS_DamageReferenceFrame_Label3", "RIGHT", 10, 0);
-				BS_DamageReferenceFrame_Label4:SetText(BS_String_DamageReference_AjustScalingSettings);
-				BS_DamageReferenceFrame_Label4:SetPoint("TOPLEFT", "BS_DamageReferenceFrame_Label3", "BOTTOMLEFT", 0, -15);
-				BS_DamageReference_SizeSettingsButton:SetPoint("LEFT", "BS_DamageReferenceFrame_Label4", "RIGHT", 10, 0);
-				BS_DamageReference_SaveButton:SetPoint("BOTTOM", "BS_DamageReferenceFrame", "BOTTOM", 0, 20);
+				BS_DamageReferenceFrame_Title:SetText(BS_String_DamageReference_Title)
+				BS_DamageReference_MaximalValue_DecreaseButton:SetPoint("LEFT", "BS_DamageReferenceFrame_Label1", "RIGHT", 10, 0)
+				BS_DamageReference_MaximalValue_DecreaseButton:SetWidth(30)
+				BS_DamageReference_MaximalValue_IncreaseButton:SetPoint("LEFT", "BS_DamageReference_MaximalValue_DecreaseButton", "RIGHT", 2, 0)
+				BS_DamageReference_MaximalValue_IncreaseButton:SetWidth(30)
+				BS_DamageReferenceFrame_Label2:SetPoint("TOPLEFT", "BS_DamageReferenceFrame_Label1", "BOTTOMLEFT", 0, -5)
+				BS_DamageReference_AverageValue_DecreaseButton:SetPoint("LEFT", "BS_DamageReferenceFrame_Label2", "RIGHT", 10, 0)
+				BS_DamageReference_AverageValue_DecreaseButton:SetWidth(30)
+				BS_DamageReference_AverageValue_IncreaseButton:SetPoint("LEFT", "BS_DamageReference_AverageValue_DecreaseButton", "RIGHT", 2, 0)
+				BS_DamageReference_AverageValue_IncreaseButton:SetWidth(30)
+				BS_DamageReferenceFrame_Label3:SetText(BS_String_DamageReference_DamageMeasurement)
+				BS_DamageReferenceFrame_Label3:SetPoint("TOPLEFT", "BS_DamageReferenceFrame_Label2", "BOTTOMLEFT", 0, -15)
+				BS_DamageReference_MeasurementButton:SetPoint("LEFT", "BS_DamageReferenceFrame_Label3", "RIGHT", 10, 0)
+				BS_DamageReferenceFrame_Label4:SetText(BS_String_DamageReference_AjustScalingSettings)
+				BS_DamageReferenceFrame_Label4:SetPoint("TOPLEFT", "BS_DamageReferenceFrame_Label3", "BOTTOMLEFT", 0, -15)
+				BS_DamageReference_SizeSettingsButton:SetPoint("LEFT", "BS_DamageReferenceFrame_Label4", "RIGHT", 10, 0)
+				BS_DamageReference_SaveButton:SetPoint("BOTTOM", "BS_DamageReferenceFrame", "BOTTOM", 0, 20)
 			</OnLoad>
 			<OnShow>
-				BS_DamageReferenceFrame_Label1:SetText(BS_String_DamageReference_MaximalValue..BS_DamageReference_UpperDamageLimit);
-				BS_DamageReferenceFrame_Label2:SetText(BS_String_DamageReference_AverageValue..BS_DamageReference_AverageDamage);
+				BS_DamageReferenceFrame_Label1:SetText(BS_String_DamageReference_MaximalValue..BS_DamageReference_UpperDamageLimit)
+				BS_DamageReferenceFrame_Label2:SetText(BS_String_DamageReference_AverageValue..BS_DamageReference_AverageDamage)
 			</OnShow>
 		</Scripts>
-		
 		<Backdrop bgFile="Interface\TutorialFrame\TutorialFrameBackground" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
 			<EdgeSize>
 				<AbsValue val="16"/>
@@ -801,7 +737,6 @@
 				<AbsInset left="5" right="5" top="5" bottom="5"/>
 			</BackgroundInsets>
 		</Backdrop>
-		
 		<Layers>
 			<Layer level="OVERLAY">
 				<FontString name="BS_DamageReferenceFrame_Title" inherits="ChatFontNormal">
@@ -829,90 +764,74 @@
 				<FontString name="BS_DamageReferenceFrame_Label4" inherits="ChatFontNormal" hidden="true"/>
 			</Layer>
 		</Layers>
-		
 		<Frames>
 			<Button name="BS_DamageReference_MaximalValue_DecreaseButton" inherits="OptionsButtonTemplate" text="-">
 				<Scripts>
 					<OnLoad></OnLoad>
 					<OnClick>
-						BS_DamageReference_UpperDamageLimit=math.max(BS_DamageReference_UpperDamageLimit-100, 100);
-						BS_DamageReference_AverageDamage = math.min(BS_DamageReference_AverageDamage,BS_DamageReference_UpperDamageLimit);
-						BS_DamageReferenceFrame_Label1:SetText(BS_String_DamageReference_MaximalValue..BS_DamageReference_UpperDamageLimit);
+						BS_DamageReference_UpperDamageLimit=math.max(BS_DamageReference_UpperDamageLimit-1000, 1000)
+						BS_DamageReference_AverageDamage = math.min(BS_DamageReference_AverageDamage,BS_DamageReference_UpperDamageLimit)
+						BS_DamageReferenceFrame_Label1:SetText(BS_String_DamageReference_MaximalValue..BS_DamageReference_UpperDamageLimit)
 					</OnClick>
 				</Scripts>
 			</Button>
-			
 			<Button name="BS_DamageReference_MaximalValue_IncreaseButton" inherits="OptionsButtonTemplate" text="+">
 				<Scripts>
 					<OnLoad></OnLoad>
 					<OnClick>
-						BS_DamageReference_UpperDamageLimit=BS_DamageReference_UpperDamageLimit+100;
-						BS_DamageReferenceFrame_Label1:SetText(BS_String_DamageReference_MaximalValue..BS_DamageReference_UpperDamageLimit);
+						BS_DamageReference_UpperDamageLimit=BS_DamageReference_UpperDamageLimit+1000
+						BS_DamageReferenceFrame_Label1:SetText(BS_String_DamageReference_MaximalValue..BS_DamageReference_UpperDamageLimit)
 					</OnClick>
 				</Scripts>
 			</Button>
-		
 			<Button name="BS_DamageReference_AverageValue_DecreaseButton" inherits="OptionsButtonTemplate" text="-">
 				<Scripts>
 					<OnLoad></OnLoad>
 					<OnClick>
-						BS_DamageReference_AverageDamage=math.max(BS_DamageReference_AverageDamage-100, 100);
-						BS_DamageReferenceFrame_Label2:SetText(BS_String_DamageReference_AverageValue..BS_DamageReference_AverageDamage);
+						BS_DamageReference_AverageDamage=math.max(BS_DamageReference_AverageDamage-1000, 1000)
+						BS_DamageReferenceFrame_Label2:SetText(BS_String_DamageReference_AverageValue..BS_DamageReference_AverageDamage)
 					</OnClick>
 				</Scripts>
 			</Button>
-			
 			<Button name="BS_DamageReference_AverageValue_IncreaseButton" inherits="OptionsButtonTemplate" text="+">
 				<Scripts>
 					<OnLoad></OnLoad>
 					<OnClick>
-						BS_DamageReference_AverageDamage=BS_DamageReference_AverageDamage+100;
-						BS_DamageReferenceFrame_Label2:SetText(BS_String_DamageReference_AverageValue..BS_DamageReference_AverageDamage);					
+						BS_DamageReference_AverageDamage=BS_DamageReference_AverageDamage+1000
+						BS_DamageReferenceFrame_Label2:SetText(BS_String_DamageReference_AverageValue..BS_DamageReference_AverageDamage)					
 					</OnClick>
 				</Scripts>
 			</Button>
-			
 			<Button name="BS_DamageReference_MeasurementButton" inherits="OptionsButtonTemplate" text="Start">
 				<Scripts>
-					<OnLoad>BS_DamageReference_MeasurementButton:SetText(BS_String_DamageReference_DamageMeasurement_Start);</OnLoad>
+					<OnLoad>BS_DamageReference_MeasurementButton:SetText(BS_String_DamageReference_DamageMeasurement_Start)</OnLoad>
 					<OnClick>
-						BS_GeneralSettings_Trigger_Criticals_DamageReference:SetChecked(1);
-						BS_DamageMeasurement_HitsCounted = 0;
-						BS_MeasurementActive = true;
-						BS_DamageReferenceFrame_Label4:Show();
-						BS_DamageReference_SizeSettingsButton:Show();
+						BS_GeneralSettings_Trigger_Criticals_DamageReference:SetChecked(1)
+						BS_DamageMeasurement_HitsCounted = 0
+						BS_MeasurementActive = true
+						BS_DamageReferenceFrame_Label4:Show()
+						BS_DamageReference_SizeSettingsButton:Show()
 					</OnClick>
 				</Scripts>
-			</Button>	
-			
+			</Button>
 			<Button name="BS_DamageReference_SizeSettingsButton" inherits="OptionsButtonTemplate" text="Settings" hidden="true">
 				<Scripts>
-					<OnLoad>BS_DamageReference_MeasurementButton:SetText(BS_String_DamageReference_AjustScalingSettings_Settings);</OnLoad>
+					<OnLoad>BS_DamageReference_MeasurementButton:SetText(BS_String_DamageReference_AjustScalingSettings_Settings)</OnLoad>
 					<OnClick>
-						BS_DamageReferenceFrame:Hide();
-						BS_ScalingFrame:Show();
+						BS_DamageReferenceFrame:Hide()
+						BS_ScalingFrame:Show()
 					</OnClick>
 				</Scripts>
-			</Button>				
-			
+			</Button>
 			<Button name="BS_DamageReference_SaveButton" inherits="OptionsButtonTemplate" text="Settings">
 				<Scripts>
-					<OnLoad>BS_DamageReference_MeasurementButton:SetText(BS_String_SaveSettings);</OnLoad>
+					<OnLoad>BS_DamageReference_MeasurementButton:SetText(BS_String_SaveSettings)</OnLoad>
 					<OnClick>
-						BS_DamageReferenceFrame:Hide();
-						BS_ConfigMenu:Show();
+						BS_DamageReferenceFrame:Hide()
+						BS_ConfigMenu:Show()
 					</OnClick>
 				</Scripts>
 			</Button>
 		</Frames>
-	</Frame>
-	
-	<Frame name="BS_EventFrame" hidden="true" frameStrata="BACKGROUND">
-		<Scripts>
-			<OnLoad>
-				BS_OnLoad();
-				BS_EventFrame:SetScript("OnEvent", BS_OnEvent);
-			</OnLoad>
-		</Scripts>
 	</Frame>
 </Ui>

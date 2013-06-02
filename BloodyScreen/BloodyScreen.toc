@@ -1,10 +1,14 @@
-﻿## Interface: 40000
-## Title: BloodyScreen |cff8080ff[Feador - Zuluhed EU]|r
+﻿## Interface: 50300
+## Title: BloodyScreen
+## Author: Feador and Resike
+## Version: 5.0.0
 ## Notes: Shows Splatters of Blood on your screen if you crit in combat.
-## Notes-deDE: Zeigt Blutspritzer bei Krits oder Kombopunkten an. FSK 18 :p 
-## Notes-zhCN: 当你在战斗中出现伤害爆击时，会显示血溅屏幕的效果
-## OptionalDeps: 
-## Dependencies:
-## SavedVariables: 
+## Notes-deDE: Zeigt Blutspritzer bei Krits oder Kombopunkten an.
 ## SavedVariablesPerCharacter: BS_BloodBehaviour, BS_MaximumTextures, BS_Timer_RunTime, BS_DisplayOnWhiteCrits, BS_MaximalScalingFactor, BS_MinimalScalingFactor, BS_EnableOnPVP, BS_EnableOnPVE, BS_DamageReference, BS_DamageReference_UpperDamageLimit, BS_DamageReference_LowerDamageLimit, BS_DamageReference_AverageDamage, BS_EnableRangeCheck
+
+BloodyScreen_Init.lua
+BloodyScreen_Main.lua
+BloodyScreen_Config.lua
+BloodyScreen_Localization.lua
+
 BloodyScreen.xml
