@@ -1,7 +1,7 @@
 ﻿## Interface: 50300
 ## Title: BloodyScreen
 ## Author: Feador and Resike
-## Version: 5.0.0
+## Version: 5.0.1
 ## Notes: Shows Splatters of Blood on your screen if you crit in combat.
 ## Notes-deDE: Zeigt Blutspritzer bei Krits oder Kombopunkten an.
 ## SavedVariablesPerCharacter: BS_BloodBehaviour, BS_MaximumTextures, BS_Timer_RunTime, BS_DisplayOnWhiteCrits, BS_MaximalScalingFactor, BS_MinimalScalingFactor, BS_EnableOnPVP, BS_EnableOnPVE, BS_DamageReference, BS_DamageReference_UpperDamageLimit, BS_DamageReference_LowerDamageLimit, BS_DamageReference_AverageDamage, BS_EnableRangeCheck

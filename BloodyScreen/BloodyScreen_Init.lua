@@ -12,10 +12,10 @@ BS_CritCount = 0
 BS_GlobalTimer = 0
 BS_Timers = { }
 BS_Textures = { }
-BS_Alpha = {}
+BS_Alpha = { }
 BS_FadingIterator = { }
 BS_FadingTime = 0.5
-BS_LastTextureShown = - 1	
+BS_LastTextureShown = - 1
 BS_ConfigFrameOpen = false
 BS_MeasurementActive = false
 

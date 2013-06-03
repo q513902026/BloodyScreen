@@ -1,11 +1,13 @@
 ﻿local BS_EventFrame = CreateFrame("Frame", "BS_EventFrame")
 BS_EventFrame:RegisterEvent("ADDON_LOADED")
 
+local _, _, _, WowBuildInfo = GetBuildInfo()
+
 --This function is executed when the whole addon is loaded.
 function BS_Init()
 	SlashCmdList["BLOODYSCREEN"] = BS_ShowConfigMenu
-	SLASH_BLOODYSCREEN1 = "/bloodyscreen"
-	SLASH_BLOODYSCREEN2 = "/bs"
+	SLASH_BLOODYSCREEN1 = "/bs"
+	SLASH_BLOODYSCREEN2 = "/bloodyscreen"
 	BS_EventFrame:UnregisterEvent("ADDON_LOADED")
 	BS_EventFrame:RegisterEvent("UNIT_COMBO_POINTS")
 	BS_EventFrame:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
@@ -18,137 +20,124 @@ end
 
 --This function handles the used game events.
 function BS_OnEvent(self, event, ...)
-	local args = {...}
 	if (event == "ADDON_LOADED") then
-		if (args[1] == "BloodyScreen") then
+		local addon = ...
+		if (addon == "BloodyScreen") then
 			BS_Init()
 		end
 	end
-	if ((event == "UNIT_COMBO_POINTS") and (BS_BloodBehaviour == 1)) then
+	if ((event == "UNIT_COMBO_POINTS") and (BS_BloodBehaviour == 1)) or ((event == "COMBAT_LOG_EVENT_UNFILTERED") and (BS_BloodBehaviour > 1)) then
 		if (((BS_EnableOnPVP) and (UnitIsPlayer("target"))) or ((BS_EnableOnPVE) and (not UnitIsPlayer("target")))) then
-			BS_AddSplatters(args)
-		end
-	end
-	if ((event == "COMBAT_LOG_EVENT_UNFILTERED") and (BS_BloodBehaviour > 1)) then
-		if (((BS_EnableOnPVP) and (UnitIsPlayer("target"))) or ((BS_EnableOnPVE) and (not UnitIsPlayer("target")))) then
-			BS_AddSplatters(args)
+			local _, eventType, sourceGUID, destGUID, swingDamage, otherDamage, swingCrit, otherCrit
+			if WowBuildInfo >= 40200 then
+				_, eventType, _, sourceGUID, _, _, _, destGUID, _, _, _, swingDamage, _, _, otherDamage, _, _, swingCrit, _, _, otherCrit = ...
+			elseif WowBuildInfo >= 40100 then
+				_, eventType, _, sourceGUID, _, _, destGUID, _, _, _, swingDamage, _, _, otherDamage, _, _, swingCrit, _, _, otherCrit = ...
+			else
+				_, eventType, sourceGUID, _, _, destGUID, _, _, _, swingDamage, _, _, otherDamage, _, _, swingCrit, _, _, otherCrit = ...
+			end
+			if (sourceGUID == UnitGUID("player")) and (destGUID == UnitGUID("target")) then
+				if (BS_BloodBehaviour == 1) then
+					for i = 0, GetComboPoints("player") - 1 do
+						if (not BS_Textures[i]:IsVisible()) then
+							BS_Textures[i]:Show()
+							BS_Texture_OnShow(i, BS_MaximalScalingFactor)
+						end
+					end
+				else
+					local scale = BS_MaximalScalingFactor
+					local dmg = 0
+					if (BS_BloodBehaviour == 2) then
+						if ((eventType == "SWING_DAMAGE") and swingCrit and (BS_DisplayOnWhiteCrits)) then
+							BS_CritCount = BS_CritCount + 1
+							dmg = swingDamage
+						elseif ((eventType == "RANGE_DAMAGE") and otherCrit and (BS_DisplayOnWhiteCrits) and (not BS_EnableRangeCheck)) then
+							BS_CritCount = BS_CritCount + 1
+							dmg = otherDamage
+						elseif ((eventType == "SPELL_DAMAGE") and otherCrit and ((not BS_EnableRangeCheck) or (BS_InRange()))) then
+							BS_CritCount = BS_CritCount + 1
+							dmg = otherDamage
+						elseif ((eventType == "SPELL_PERIODIC_DAMAGE") and otherCrit and ((not BS_EnableRangeCheck) or (BS_InRange()))) then
+							BS_CritCount = BS_CritCount + 1
+							dmg = otherDamage
+						end
+						if ((BS_MeasurementActive) and (dmg ~= 0)) then
+							BS_DamageMeasurement_Evaluate(dmg)
+						end
+						if (BS_DamageReference) then
+							dmg = math.max(BS_DamageReference_LowerDamageLimit,dmg)
+							scale = BS_MinimalScalingFactor + (BS_MaximalScalingFactor - BS_MinimalScalingFactor) * (dmg / BS_DamageReference_UpperDamageLimit)
+						end
+						for i = 0, math.min(BS_CritCount - 1, BS_MaximumTextures - 1) do
+							if (not BS_Textures[i]:IsVisible()) then
+								BS_Textures[i]:Show()
+								BS_Texture_OnShow(i, scale)
+							end
+						end
+					elseif (BS_BloodBehaviour == 3) then
+						local CritMatchesConfig = false
+						if ((eventType == "SWING_DAMAGE") and swingCrit and (BS_DisplayOnWhiteCrits)) then
+							CritMatchesConfig = true
+							dmg = swingDamage
+						elseif ((eventType == "RANGE_DAMAGE") and otherCrit and (BS_DisplayOnWhiteCrits) and (not BS_EnableRangeCheck)) then
+							CritMatchesConfig = true
+							dmg = otherDamage
+						elseif ((eventType == "SPELL_DAMAGE") and otherCrit and ((not BS_EnableRangeCheck) or (BS_InRange()))) then
+							CritMatchesConfig = true
+							dmg = otherDamage
+						elseif ((eventType == "SPELL_PERIODIC_DAMAGE") and otherCrit and ((not BS_EnableRangeCheck) or (BS_InRange()))) then
+							CritMatchesConfig = true
+							dmg = otherDamage
+						end
+						if ((BS_MeasurementActive) and (dmg ~= 0)) then
+							BS_DamageMeasurement_Evaluate(dmg)
+						end
+						if (BS_DamageReference) then
+							dmg = math.max(BS_DamageReference_LowerDamageLimit,dmg)
+							scale = BS_MinimalScalingFactor + (BS_MaximalScalingFactor - BS_MinimalScalingFactor) * (dmg / BS_DamageReference_UpperDamageLimit)
+						end
+						if (CritMatchesConfig) then
+							BS_LastTextureShown = (BS_LastTextureShown + 1) % BS_MaximumTextures
+							BS_Timers[BS_LastTextureShown] = time()
+							BS_Textures[BS_LastTextureShown]:Show()
+							BS_Texture_OnShow(BS_LastTextureShown, scale)
+						end
+					elseif (BS_BloodBehaviour == 4) then
+						local CritMatchesConfig = false
+						if ((eventType == "SWING_DAMAGE") and swingCrit and (BS_DisplayOnWhiteCrits)) then
+							CritMatchesConfig = true
+							dmg = swingDamage
+						elseif ((eventType == "RANGE_DAMAGE") and otherCrit and (BS_DisplayOnWhiteCrits) and (not BS_EnableRangeCheck)) then
+							CritMatchesConfig = true
+							dmg = otherDamage
+						elseif ((eventType == "SPELL_DAMAGE") and otherCrit and ((not BS_EnableRangeCheck) or (BS_InRange()))) then
+							CritMatchesConfig = true
+							dmg = otherDamage
+						elseif ((eventType == "SPELL_PERIODIC_DAMAGE") and otherCrit and ((not BS_EnableRangeCheck) or (BS_InRange()))) then
+							CritMatchesConfig = true
+							dmg = otherDamage
+						end
+						if ((BS_MeasurementActive) and (dmg ~= 0)) then
+							BS_DamageMeasurement_Evaluate(dmg)
+						end
+						if (BS_DamageReference) then
+							dmg = math.max(BS_DamageReference_LowerDamageLimit,dmg)
+							scale = BS_MinimalScalingFactor + (BS_MaximalScalingFactor - BS_MinimalScalingFactor) * (dmg / BS_DamageReference_UpperDamageLimit)
+						end
+						if (CritMatchesConfig) then
+							BS_LastTextureShown = (BS_LastTextureShown + 1) % BS_MaximumTextures
+							BS_GlobalTimer = time()
+							BS_Textures[BS_LastTextureShown]:Show()
+							BS_Texture_OnShow(BS_LastTextureShown, scale)
+						end
+					end
+				end
+			end
 		end
 	end
 end
 
 BS_EventFrame:SetScript("OnEvent", BS_OnEvent)
-
---This function adds a splatter to the texture frame.
-function BS_AddSplatters(args)
-	if (BS_BloodBehaviour == 1) then
-		for i = 0, GetComboPoints("player") - 1 do
-			if (not BS_Textures[i]:IsVisible()) then
-				BS_Textures[i]:Show()
-				BS_Texture_OnShow(i, BS_MaximalScalingFactor)
-			end
-		end
-	else
-		local eventType = args[2]
-		local srcGUID = args[4]
-		local destGUID = args[8]
-		local scale = BS_MaximalScalingFactor
-		local dmg = 0
-		if (srcGUID == UnitGUID("player")) then
-			if (BS_BloodBehaviour == 2) then
-				if (destGUID == UnitGUID("target")) then
-					if ((eventType == "SWING_DAMAGE") and (args[18]) and (BS_DisplayOnWhiteCrits)) then
-						BS_CritCount = BS_CritCount + 1
-						dmg = args[12]
-					elseif ((eventType == "RANGE_DAMAGE") and (args[21]) and (BS_DisplayOnWhiteCrits) and (not BS_EnableRangeCheck)) then
-						BS_CritCount = BS_CritCount + 1
-						dmg = args[15]
-					elseif ((eventType == "SPELL_DAMAGE") and (args[21]) and ((not BS_EnableRangeCheck) or (BS_InRange()))) then
-						BS_CritCount = BS_CritCount + 1
-						dmg = args[15]
-					elseif ((eventType == "SPELL_PERIODIC_DAMAGE") and (args[21]) and ((not BS_EnableRangeCheck) or (BS_InRange()))) then
-						BS_CritCount = BS_CritCount + 1
-						dmg = args[15]
-					end
-				end
-				if ((BS_MeasurementActive) and (dmg ~= 0)) then
-					BS_DamageMeasurement_Evaluate(dmg)
-				end
-				if (BS_DamageReference) then
-					dmg = math.max(BS_DamageReference_LowerDamageLimit,dmg)
-					scale = BS_MinimalScalingFactor + (BS_MaximalScalingFactor - BS_MinimalScalingFactor) * (dmg / BS_DamageReference_UpperDamageLimit)
-				end
-				for i = 0, math.min(BS_CritCount - 1, BS_MaximumTextures - 1) do
-					if (not BS_Textures[i]:IsVisible()) then
-						BS_Textures[i]:Show()
-						BS_Texture_OnShow(i, scale)
-					end
-				end
-			end
-			if (BS_BloodBehaviour == 3) then
-				if (destGUID == UnitGUID("target")) then
-					local CritMatchesConfig = false
-					if ((eventType == "SWING_DAMAGE") and (args[18]) and (BS_DisplayOnWhiteCrits)) then
-						CritMatchesConfig = true
-						dmg = args[12]
-					elseif ((eventType == "RANGE_DAMAGE") and (args[21]) and (BS_DisplayOnWhiteCrits) and (not BS_EnableRangeCheck)) then
-						CritMatchesConfig = true
-						dmg = args[15]
-					elseif ((eventType == "SPELL_DAMAGE") and (args[21]) and ((not BS_EnableRangeCheck) or (BS_InRange()))) then
-						CritMatchesConfig = true
-						dmg = args[15]
-					elseif ((eventType == "SPELL_PERIODIC_DAMAGE") and (args[21]) and ((not BS_EnableRangeCheck) or (BS_InRange()))) then
-						CritMatchesConfig = true
-						dmg = args[15]
-					end
-					if ((BS_MeasurementActive) and (dmg ~= 0)) then
-						BS_DamageMeasurement_Evaluate(dmg)
-					end
-					if (BS_DamageReference) then
-						dmg = math.max(BS_DamageReference_LowerDamageLimit,dmg)
-						scale = BS_MinimalScalingFactor + (BS_MaximalScalingFactor - BS_MinimalScalingFactor) * (dmg / BS_DamageReference_UpperDamageLimit)
-					end
-					if (CritMatchesConfig) then
-						BS_LastTextureShown = (BS_LastTextureShown + 1) % BS_MaximumTextures
-						BS_Timers[BS_LastTextureShown] = time()
-						BS_Textures[BS_LastTextureShown]:Show()
-						BS_Texture_OnShow(BS_LastTextureShown, scale)
-					end 
-				end
-			end
-			if (BS_BloodBehaviour == 4) then
-				if (destGUID == UnitGUID("target")) then
-					local CritMatchesConfig = false
-					if ((eventType == "SWING_DAMAGE") and (args[18]) and (BS_DisplayOnWhiteCrits)) then
-						CritMatchesConfig = true
-						dmg = args[12]
-					elseif ((eventType == "RANGE_DAMAGE") and (args[21]) and (BS_DisplayOnWhiteCrits) and (not BS_EnableRangeCheck)) then
-						CritMatchesConfig = true
-						dmg = args[15]
-					elseif ((eventType == "SPELL_DAMAGE") and (args[21]) and ((not BS_EnableRangeCheck) or (BS_InRange()))) then
-						CritMatchesConfig = true
-						dmg = args[15]
-					elseif ((eventType == "SPELL_PERIODIC_DAMAGE") and (args[21]) and ((not BS_EnableRangeCheck) or (BS_InRange()))) then
-						CritMatchesConfig = true
-						dmg = args[15]
-					end
-					if ((BS_MeasurementActive) and (dmg ~= 0)) then
-						BS_DamageMeasurement_Evaluate(dmg)
-					end
-					if (BS_DamageReference) then
-						dmg = math.max(BS_DamageReference_LowerDamageLimit,dmg)
-						scale = BS_MinimalScalingFactor + (BS_MaximalScalingFactor - BS_MinimalScalingFactor) * (dmg / BS_DamageReference_UpperDamageLimit)
-					end
-					if (CritMatchesConfig) then
-						BS_LastTextureShown = (BS_LastTextureShown + 1) % BS_MaximumTextures
-						BS_GlobalTimer = time()
-						BS_Textures[BS_LastTextureShown]:Show()
-						BS_Texture_OnShow(BS_LastTextureShown, scale)
-					end
-				end
-			end
-		end
-	end
-end
 
 --This function is called, whenever the texture frame is updated. It determines, which textures have to be hidden.
 function BS_Textures_OnUpdate()
@@ -162,8 +151,7 @@ function BS_Textures_OnUpdate()
 					BS_FadingIterator[i] = 1
 				end
 			end
-		end
-		if (BS_BloodBehaviour == 2) then
+		elseif (BS_BloodBehaviour == 2) then
 			if (UnitAffectingCombat("player") == nil) then
 				for i = 0, BS_MaximumTextures - 1 do
 					if ((BS_Textures[i]:IsVisible()) and (BS_FadingIterator[i] <= 0)) then
@@ -171,8 +159,7 @@ function BS_Textures_OnUpdate()
 					end
 				end
 			end
-		end
-		if (BS_BloodBehaviour == 3) then
+		elseif (BS_BloodBehaviour == 3) then
 			for i = 0, BS_MaximumTextures - 1 do
 				if ((BS_Timers[i] > 0) or (BS_Textures[i]:IsVisible())) then
 					if ((BS_Timers[i] < time() - BS_Timer_RunTime) and (BS_FadingIterator[i] <= 0)) then
@@ -181,8 +168,7 @@ function BS_Textures_OnUpdate()
 					end
 				end
 			end
-		end
-		if (BS_BloodBehaviour == 4) then
+		elseif (BS_BloodBehaviour == 4) then
 			if (BS_GlobalTimer > 0) then
 				if (BS_GlobalTimer < time() - BS_Timer_RunTime) then
 					BS_GlobalTimer = 0

@@ -100,7 +100,7 @@ function BS_ApplySettings()
 		print("|cff0000ffBloodyScreen: |cff00ff00"..BS_String_Notification_MeasurementRunning.."|r")
 	end
 	if (BS_EnableRangeCheck) then
-		local _,class = UnitClass("player")
+		local _, class = UnitClass("player")
 		if (BS_RangeCheckAction[class] < 0) then
 			print("|cff0000ffBloodyScreen: |cffff0000"..BS_String_Notification_RangeCheckCanNotBePerformed.."|r")
 			BS_EnableRangeCheck = false
@@ -122,13 +122,15 @@ function BS_SearchSpell(spellName, bookType)
 	local i, s
 	local found = false
 	for i = 1, MAX_SKILLLINE_TABS do
-	local name, _, offset, numSpells = GetSpellTabInfo(i)
-	if (not name) then
-		break
-	end
-	for s = offset + 1, offset + numSpells do
-		local	spell, rank = GetSpellName(s, bookType)
-		if (spell == spellName) then found = true end
+		local name, _, offset, numSpells = GetSpellTabInfo(i)
+		if (not name) then
+			break
+		end
+		for s = offset + 1, offset + numSpells do
+			local	spell, rank = GetSpellName(s, bookType)
+			if (spell == spellName) then
+				found = true
+			end
 			if (found and spell ~= spellName) then
 				return s - 1
 			end
@@ -195,5 +197,5 @@ end
 
 --This function calculates the lower damage limit after a damage measurement.
 function BS_EvaluateDamageData()
-	BS_DamageReference_LowerDamageLimit = math.max(0, BS_DamageReference_AverageDamage-(BS_DamageReference_UpperDamageLimit-BS_DamageReference_AverageDamage))
+	BS_DamageReference_LowerDamageLimit = math.max(0, BS_DamageReference_AverageDamage - (BS_DamageReference_UpperDamageLimit - BS_DamageReference_AverageDamage))
 end
