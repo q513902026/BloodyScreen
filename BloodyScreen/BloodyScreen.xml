@@ -180,7 +180,7 @@
 					</Anchor>
 				</Anchors>
 			</CheckButton>
-			<CheckButton name="BS_GeneralSettings_Trigger_Criticals" inherits="OptionsCheckButtonTemplate" checked="false">
+			<CheckButton name="BS_GeneralSettings_Trigger_Criticals" inherits="InterfaceOptionsCheckButtonTemplate" checked="false">
 				<Scripts>
 					<OnLoad>
 						getglobal(BS_GeneralSettings_Trigger_Criticals:GetName().."Text"):SetText(BS_String_General_Criticals)
@@ -194,14 +194,14 @@
 					</OnClick>
 				</Scripts>
 			</CheckButton>
-			<CheckButton name="BS_GeneralSettings_Trigger_Criticals_Swipes" inherits="OptionsCheckButtonTemplate" checked="false">
+			<CheckButton name="BS_GeneralSettings_Trigger_Criticals_Swipes" inherits="InterfaceOptionsCheckButtonTemplate" checked="false">
 				<Scripts>
 					<OnLoad>
 						getglobal(BS_GeneralSettings_Trigger_Criticals_Swipes:GetName().."Text"):SetText(BS_String_General_Criticals_Swipes)
 					</OnLoad>
 				</Scripts>
 			</CheckButton>
-			<CheckButton name="BS_GeneralSettings_Trigger_Criticals_NoTimers" inherits="OptionsCheckButtonTemplate" checked="false">
+			<CheckButton name="BS_GeneralSettings_Trigger_Criticals_NoTimers" inherits="InterfaceOptionsCheckButtonTemplate" checked="false">
 				<Scripts>
 					<OnLoad>
 						getglobal(BS_GeneralSettings_Trigger_Criticals_NoTimers:GetName().."Text"):SetText(BS_String_General_Criticals_NoTimers)
@@ -215,7 +215,7 @@
 					</OnClick>
 				</Scripts>
 			</CheckButton>
-			<CheckButton name="BS_GeneralSettings_Trigger_Criticals_Timers" inherits="OptionsCheckButtonTemplate" checked="false">
+			<CheckButton name="BS_GeneralSettings_Trigger_Criticals_Timers" inherits="InterfaceOptionsCheckButtonTemplate" checked="false">
 				<Scripts>
 					<OnLoad>
 						getglobal(BS_GeneralSettings_Trigger_Criticals_Timers:GetName().."Text"):SetText(BS_String_General_Criticals_Timers)
@@ -239,7 +239,7 @@
 					</OnClick>
 				</Scripts>
 			</Button>
-			<CheckButton name="BS_GeneralSettings_Trigger_Criticals_DamageReference" inherits="OptionsCheckButtonTemplate" checked="false">
+			<CheckButton name="BS_GeneralSettings_Trigger_Criticals_DamageReference" inherits="InterfaceOptionsCheckButtonTemplate" checked="false">
 				<Scripts>
 					<OnLoad>
 						getglobal(BS_GeneralSettings_Trigger_Criticals_DamageReference:GetName().."Text"):SetText(BS_String_General_Criticals_DamageReference)
@@ -256,7 +256,7 @@
 					</OnClick>
 				</Scripts>
 			</Button>
-			<CheckButton name="BS_GeneralSettings_Trigger_Criticals_RangeChecking" inherits="OptionsCheckButtonTemplate" checked="false">
+			<CheckButton name="BS_GeneralSettings_Trigger_Criticals_RangeChecking" inherits="InterfaceOptionsCheckButtonTemplate" checked="false">
 				<Scripts>
 					<OnLoad>
 						getglobal(BS_GeneralSettings_Trigger_Criticals_RangeChecking:GetName().."Text"):SetText(BS_String_General_Criticals_RangeCheck)
