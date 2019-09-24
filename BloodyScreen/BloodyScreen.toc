@@ -1,7 +1,7 @@
 ﻿## Interface: 11302
 ## Title: BloodyScreen
 ## Author: Feador and Resike
-## Version: 5.0.1
+## Version: 5.0.1 classic
 ## Notes: Shows Splatters of Blood on your screen if you crit in combat.
 ## Notes-zhCN: 当你在战斗中出现伤害爆击时，会显示血溅屏幕的效果
 ## Notes-deDE: Zeigt Blutspritzer bei Krits oder Kombopunkten an.
