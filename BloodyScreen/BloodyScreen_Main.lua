@@ -39,6 +39,15 @@ function BS_OnEvent(self, event, ...)
 			else
 				_, eventType, sourceGUID, _, _, destGUID, _, _, _, swingDamage, _, _, otherDamage, _, _, swingCrit, _, _, otherCrit = ...
 			end
+			--[[
+			if event =="COMBAT_LOG_EVENT_UNFILTERED" and sourceGUID == UnitGUID("player") then
+				if eventType == "SWING_DAMAGE" then
+					print(swingDamage,swingCrit)
+				else
+					print(otherDamage, otherCrit)
+				end
+			end
+			]]
 			if (sourceGUID == UnitGUID("player")) and (destGUID == UnitGUID("target")) then
 				if (BS_BloodBehaviour == 1) then
 					for i = 0, GetComboPoints("player") - 1 do
@@ -155,7 +164,7 @@ function BS_Textures_OnUpdate()
 				end
 			end
 		elseif (BS_BloodBehaviour == 2) then
-			if (UnitAffectingCombat("player") == nil) then
+			if (not UnitAffectingCombat("player")) then
 				for i = 0, BS_MaximumTextures - 1 do
 					if ((BS_Textures[i]:IsVisible()) and (BS_FadingIterator[i] <= 0)) then
 						BS_FadingIterator[i] = 1

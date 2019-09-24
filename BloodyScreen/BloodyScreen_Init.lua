@@ -1,5 +1,5 @@
 ﻿--Version Info / Texture files.
-BS_Version = " 5.0.0"
+BS_Version = " 1.13.2"
 BS_TexturePath = "Interface\\AddOns\\BloodyScreen\\Textures\\Splatter"
 BS_NumberOfTextureFiles = 5
 

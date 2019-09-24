@@ -9,7 +9,7 @@
 		</Anchors>
 		<Scripts>
 			<OnLoad>
-				BS_ConfigMenu_Title:SetText("BloodyScreen"..BS_Version)
+				BS_ConfigMenu_Title:SetText("BloodyScreen Classic\n"..BS_Version)
 				BS_ConfigMenu:SetPoint("CENTER", 0, 0)
 				BS_ConfigMenu_GeneralSettings_Button:SetPoint("CENTER", "BS_ConfigMenu", "TOP", 0, -50)
 				BS_ConfigMenu_GeneralSettings_Button:SetWidth(BS_ConfigMenu:GetWidth()-10)
@@ -41,7 +41,7 @@
 					<Anchors>
 						<Anchor point="TOP">
 							<Offset>
-								<AbsDimension x="0" y="-20"/>
+								<AbsDimension x="0" y="-10"/>
 							</Offset>
 						</Anchor>
 					</Anchors>
@@ -122,6 +122,7 @@
 			</OnLoad>
 			<OnShow>
 				BS_GeneralSettings_NumberOfTextures:SetText(BS_String_General_NumberOfTextures..BS_MaximumTextures)
+				BS_GeneralSettingsFrame_Mode:SetText(BS_String_General_Mode..BS_BloodBehaviour)
 			</OnShow>
 		</Scripts>
 		<Backdrop bgFile="Interface\TutorialFrame\TutorialFrameBackground" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
@@ -146,6 +147,15 @@
 						</Anchor>
 					</Anchors>
 				</FontString>
+				<FontString name="BS_GeneralSettingsFrame_Mode" inherits="ChatFontNormal">
+					<Anchors>
+						<Anchor point="TOPRIGHT">
+							<Offset>
+								<AbsDimension x="-15" y="-15"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
 				<FontString name="BS_GeneralSettingsFrame_Label" inherits="ChatFontNormal">
 					<Anchors>
 						<Anchor point="TOPLEFT">
@@ -165,10 +175,10 @@
 						getglobal(BS_GeneralSettings_Trigger_ComboPoints:GetName().."Text"):SetText(BS_String_General_ComboPoints)
 					</OnLoad>
 					<OnClick>
-						if (BS_GeneralSettings_Trigger_ComboPoints:GetChecked() ~= nil) then
-							BS_GeneralSettings_Trigger_Criticals:SetChecked(nil)
+						if (BS_GeneralSettings_Trigger_ComboPoints:GetChecked()) then
+							BS_GeneralSettings_Trigger_Criticals:SetChecked(false)
 						else
-							BS_GeneralSettings_Trigger_ComboPoints:SetChecked(1)
+							BS_GeneralSettings_Trigger_ComboPoints:SetChecked(true)
 						end
 					</OnClick>
 				</Scripts>
@@ -186,10 +196,10 @@
 						getglobal(BS_GeneralSettings_Trigger_Criticals:GetName().."Text"):SetText(BS_String_General_Criticals)
 					</OnLoad>
 					<OnClick>
-						if (BS_GeneralSettings_Trigger_Criticals:GetChecked() ~= nil) then
-							BS_GeneralSettings_Trigger_ComboPoints:SetChecked(nil)
+						if (BS_GeneralSettings_Trigger_Criticals:GetChecked()) then
+							BS_GeneralSettings_Trigger_ComboPoints:SetChecked(false)
 						else
-							BS_GeneralSettings_Trigger_Criticals:SetChecked(1)
+							BS_GeneralSettings_Trigger_Criticals:SetChecked(true)
 						end
 					</OnClick>
 				</Scripts>
@@ -207,10 +217,10 @@
 						getglobal(BS_GeneralSettings_Trigger_Criticals_NoTimers:GetName().."Text"):SetText(BS_String_General_Criticals_NoTimers)
 					</OnLoad>
 					<OnClick>
-						if (BS_GeneralSettings_Trigger_Criticals_NoTimers:GetChecked() ~= nil) then
-							BS_GeneralSettings_Trigger_Criticals_Timers:SetChecked(nil)
+						if (BS_GeneralSettings_Trigger_Criticals_NoTimers:GetChecked()) then
+							BS_GeneralSettings_Trigger_Criticals_Timers:SetChecked(false)
 						else
-							BS_GeneralSettings_Trigger_Criticals_NoTimers:SetChecked(1)
+							BS_GeneralSettings_Trigger_Criticals_NoTimers:SetChecked(true)
 						end
 					</OnClick>
 				</Scripts>
@@ -221,10 +231,10 @@
 						getglobal(BS_GeneralSettings_Trigger_Criticals_Timers:GetName().."Text"):SetText(BS_String_General_Criticals_Timers)
 					</OnLoad>
 					<OnClick>
-						if (BS_GeneralSettings_Trigger_Criticals_Timers:GetChecked() ~= nil) then
-							BS_GeneralSettings_Trigger_Criticals_NoTimers:SetChecked(nil)
+						if (BS_GeneralSettings_Trigger_Criticals_Timers:GetChecked()) then
+							BS_GeneralSettings_Trigger_Criticals_NoTimers:SetChecked(false)
 						else
-							BS_GeneralSettings_Trigger_Criticals_Timers:SetChecked(1)
+							BS_GeneralSettings_Trigger_Criticals_Timers:SetChecked(true)
 						end
 					</OnClick>
 				</Scripts>
@@ -393,10 +403,10 @@
 						getglobal(BS_Timers_GlobalTimer:GetName().."Text"):SetText(BS_String_Timers_GlobalTimer)
 					</OnLoad>
 					<OnClick>
-						if (BS_Timers_GlobalTimer:GetChecked() ~= nil) then
-							BS_Timers_Separated:SetChecked(nil)
+						if (BS_Timers_GlobalTimer:GetChecked()) then
+							BS_Timers_Separated:SetChecked(false)
 						else
-							BS_Timers_GlobalTimer:SetChecked(1)
+							BS_Timers_GlobalTimer:SetChecked(true)
 						end
 					</OnClick>
 				</Scripts>
@@ -414,10 +424,10 @@
 						getglobal(BS_Timers_Separated:GetName().."Text"):SetText(BS_String_Timers_Separated)
 					</OnLoad>
 					<OnClick>
-						if (BS_Timers_Separated:GetChecked() ~= nil) then
-							BS_Timers_GlobalTimer:SetChecked(nil)
+						if (BS_Timers_Separated:GetChecked()) then
+							BS_Timers_GlobalTimer:SetChecked(false)
 						else
-							BS_Timers_Separated:SetChecked(1)
+							BS_Timers_Separated:SetChecked(true)
 						end
 					</OnClick>
 				</Scripts>
@@ -806,7 +816,7 @@
 				<Scripts>
 					<OnLoad>BS_DamageReference_MeasurementButton:SetText(BS_String_DamageReference_DamageMeasurement_Start)</OnLoad>
 					<OnClick>
-						BS_GeneralSettings_Trigger_Criticals_DamageReference:SetChecked(1)
+						BS_GeneralSettings_Trigger_Criticals_DamageReference:SetChecked(true)
 						BS_DamageMeasurement_HitsCounted = 0
 						BS_MeasurementActive = true
 						BS_DamageReferenceFrame_Label4:Show()

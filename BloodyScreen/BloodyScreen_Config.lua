@@ -55,14 +55,14 @@ end
 
 --This function reads the settings the user made by (un-)checking the checkboxes in the config menu.
 function BS_ApplySettings()
-	if (BS_GeneralSettings_Trigger_ComboPoints:GetChecked() ~= nil) then
+	if (BS_GeneralSettings_Trigger_ComboPoints:GetChecked()) then
 		BS_BloodBehaviour = 1
 	else
-		if (BS_GeneralSettings_Trigger_Criticals:GetChecked() ~= nil) then
-			if (BS_GeneralSettings_Trigger_Criticals_NoTimers:GetChecked() ~= nil) then
+		if (BS_GeneralSettings_Trigger_Criticals:GetChecked()) then
+			if (BS_GeneralSettings_Trigger_Criticals_NoTimers:GetChecked()) then
 				BS_BloodBehaviour = 2
 			else 
-				if (BS_Timers_Separated:GetChecked() ~= nil) then
+				if (BS_Timers_Separated:GetChecked()) then
 					BS_BloodBehaviour = 3
 				else
 					BS_BloodBehaviour = 4
@@ -70,27 +70,27 @@ function BS_ApplySettings()
 			end
 		end
 	end
-	if (BS_GeneralSettings_Trigger_Criticals_Swipes:GetChecked() ~= nil) then
+	if (BS_GeneralSettings_Trigger_Criticals_Swipes:GetChecked()) then
 		BS_DisplayOnWhiteCrits = true
 	else
 		BS_DisplayOnWhiteCrits = false
 	end
-	if (BS_GeneralSettings_Trigger_Criticals_DamageReference:GetChecked() ~= nil) then
+	if (BS_GeneralSettings_Trigger_Criticals_DamageReference:GetChecked()) then
 		BS_DamageReference = true
 	else
 		BS_DamageReference = false
 	end
-	if (BS_GeneralSettings_PVP:GetChecked() ~= nil) then
+	if (BS_GeneralSettings_PVP:GetChecked()) then
 		BS_EnableOnPVP = true
 	else
 		BS_EnableOnPVP = false
 	end
-	if (BS_GeneralSettings_PVE:GetChecked() ~= nil) then
+	if (BS_GeneralSettings_PVE:GetChecked()) then
 		BS_EnableOnPVE = true
 	else
 		BS_EnableOnPVE = false
 	end	
-	if (BS_GeneralSettings_Trigger_Criticals_RangeChecking:GetChecked() ~= nil) then	
+	if (BS_GeneralSettings_Trigger_Criticals_RangeChecking:GetChecked()) then	
 		BS_EnableRangeCheck = true
 	else
 		BS_EnableRangeCheck = false
@@ -104,14 +104,14 @@ function BS_ApplySettings()
 		if (BS_RangeCheckAction[class] < 0) then
 			print("|cff0000ffBloodyScreen: |cffff0000"..BS_String_Notification_RangeCheckCanNotBePerformed.."|r")
 			BS_EnableRangeCheck = false
-			BS_GeneralSettings_Trigger_Criticals_RangeChecking:SetChecked(nil)
+			BS_GeneralSettings_Trigger_Criticals_RangeChecking:SetChecked(false)
 		else
 			--local spellname = GetSpellInfo(BS_RangeCheckAction[class])
 			--if (BS_SearchSpell(spellname, "spell") == nil) then
 			if (IsUsableSpell(BS_RangeCheckAction[class]) == nil) then
 				print("|cff0000ffBloodyScreen: |cffff0000"..BS_String_Notification_RangeCheckCanNotBePerformed.."|r")
 				BS_EnableRangeCheck = false
-				BS_GeneralSettings_Trigger_Criticals_RangeChecking:SetChecked(nil)
+				BS_GeneralSettings_Trigger_Criticals_RangeChecking:SetChecked(false)
 			end
 		end
 	end
@@ -145,53 +145,53 @@ end
 --This function does the reverse of BS_ApplySettings: It sets the checkboxes after the saved settings.
 function BS_ShowSettings()
 	if (BS_BloodBehaviour == 1) then
-		BS_GeneralSettings_Trigger_ComboPoints:SetChecked (1)
-		BS_GeneralSettings_Trigger_Criticals:SetChecked(nil)
-		BS_GeneralSettings_Trigger_Criticals_Timers:SetChecked(1)
-		BS_Timers_Separated:SetChecked(1)
-		BS_Timers_GlobalTimer:SetChecked(nil)
+		BS_GeneralSettings_Trigger_ComboPoints:SetChecked (true)
+		BS_GeneralSettings_Trigger_Criticals:SetChecked(false)
+		BS_GeneralSettings_Trigger_Criticals_Timers:SetChecked(true)
+		BS_Timers_Separated:SetChecked(true)
+		BS_Timers_GlobalTimer:SetChecked(false)
 	else
-		BS_GeneralSettings_Trigger_Criticals:SetChecked(1)
-		BS_GeneralSettings_Trigger_ComboPoints:SetChecked (nil)
+		BS_GeneralSettings_Trigger_Criticals:SetChecked(true)
+		BS_GeneralSettings_Trigger_ComboPoints:SetChecked (false)
 		if (BS_BloodBehaviour == 2) then
-			BS_GeneralSettings_Trigger_Criticals_NoTimers:SetChecked(1)
-			BS_GeneralSettings_Trigger_Criticals_Timers:SetChecked(nil)
+			BS_GeneralSettings_Trigger_Criticals_NoTimers:SetChecked(true)
+			BS_GeneralSettings_Trigger_Criticals_Timers:SetChecked(false)
 		else
-			BS_GeneralSettings_Trigger_Criticals_Timers:SetChecked(1)
-			BS_GeneralSettings_Trigger_Criticals_NoTimers:SetChecked(nil)
+			BS_GeneralSettings_Trigger_Criticals_Timers:SetChecked(true)
+			BS_GeneralSettings_Trigger_Criticals_NoTimers:SetChecked(false)
 			if (BS_BloodBehaviour == 3) then
-				BS_Timers_Separated:SetChecked(1)
-				BS_Timers_GlobalTimer:SetChecked(nil)
+				BS_Timers_Separated:SetChecked(true)
+				BS_Timers_GlobalTimer:SetChecked(false)
 			else
-				BS_Timers_GlobalTimer:SetChecked(1)
-				BS_Timers_Separated:SetChecked(nil)
+				BS_Timers_GlobalTimer:SetChecked(true)
+				BS_Timers_Separated:SetChecked(false)
 			end
 		end
 	end
 	if (BS_EnableOnPVP) then
-		BS_GeneralSettings_PVP:SetChecked(1)
+		BS_GeneralSettings_PVP:SetChecked(true)
 	else
-		BS_GeneralSettings_PVP:SetChecked(nil)
+		BS_GeneralSettings_PVP:SetChecked(false)
 	end
 	if (BS_EnableOnPVE) then
-		BS_GeneralSettings_PVE:SetChecked(1)
+		BS_GeneralSettings_PVE:SetChecked(true)
 	else
-		BS_GeneralSettings_PVE:SetChecked(nil)
+		BS_GeneralSettings_PVE:SetChecked(false)
 	end
 	if (BS_DisplayOnWhiteCrits) then
-		BS_GeneralSettings_Trigger_Criticals_Swipes:SetChecked(1)
+		BS_GeneralSettings_Trigger_Criticals_Swipes:SetChecked(true)
 	else
-		BS_GeneralSettings_Trigger_Criticals_Swipes:SetChecked(nil)
+		BS_GeneralSettings_Trigger_Criticals_Swipes:SetChecked(false)
 	end
 	if (BS_DamageReference) then
-		BS_GeneralSettings_Trigger_Criticals_DamageReference:SetChecked(1)
+		BS_GeneralSettings_Trigger_Criticals_DamageReference:SetChecked(true)
 	else
-		BS_GeneralSettings_Trigger_Criticals_DamageReference:SetChecked(nil)
+		BS_GeneralSettings_Trigger_Criticals_DamageReference:SetChecked(false)
 	end
 	if (BS_EnableRangeCheck) then
-		BS_GeneralSettings_Trigger_Criticals_RangeChecking:SetChecked(1)
+		BS_GeneralSettings_Trigger_Criticals_RangeChecking:SetChecked(true)
 	else
-		BS_GeneralSettings_Trigger_Criticals_RangeChecking:SetChecked(nil)
+		BS_GeneralSettings_Trigger_Criticals_RangeChecking:SetChecked(false)
 	end
 end
 

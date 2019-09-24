@@ -7,6 +7,7 @@ BS_String_SaveSettings = "Save settings"
 BS_String_Exit = "Quit"
 
 BS_String_General_Title = "General settings"
+BS_String_General_Mode = "Mode: "
 BS_String_General_Trigger = "Set the trigger to display the splatters:"
 BS_String_General_ComboPoints = "Display splatters on combo points gain."
 BS_String_General_Criticals = "Display splatters on critical hits."
@@ -64,6 +65,7 @@ if ( GetLocale() == "deDE" ) then
 	BS_String_Exit = "Schliessen"
 
 	BS_String_General_Title = "Allgemein"
+	BS_String_General_Mode = "Läge: "
 	BS_String_General_Trigger = "Bitte wählen sie den Auslöser für die Blutflecken:"
 	BS_String_General_ComboPoints = "Zeige das Blut nach Combopunkten an."
 	BS_String_General_Criticals = "Zeige das Blut bei kritischen Schlägen an."
@@ -122,6 +124,7 @@ if (GetLocale() == "zhCN") then
 	BS_String_Exit = "退出"
 
 	BS_String_General_Title = "常规设置"
+	BS_String_General_Mode = "模式: "
 	BS_String_General_Trigger = "设置显示血溅效果的触发方式："
 	BS_String_General_ComboPoints = "获得连击点时，显示血溅效果。"
 	BS_String_General_Criticals = "伤害爆击时，显示血溅效果。"
