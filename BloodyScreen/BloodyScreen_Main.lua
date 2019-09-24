@@ -9,7 +9,7 @@ function BS_Init()
 	SLASH_BLOODYSCREEN1 = "/bs"
 	SLASH_BLOODYSCREEN2 = "/bloodyscreen"
 	BS_EventFrame:UnregisterEvent("ADDON_LOADED")
-	BS_EventFrame:RegisterEvent("UNIT_COMBO_POINTS")
+	BS_EventFrame:RegisterEvent("UNIT_POWER_FREQUENT")
 	BS_EventFrame:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
 	BS_EventFrame:RegisterEvent("PLAYER_REGEN_DISABLED")
 	BS_EventFrame:RegisterEvent("PLAYER_REGEN_ENABLED")
@@ -26,11 +26,14 @@ function BS_OnEvent(self, event, ...)
 			BS_Init()
 		end
 	end
-	if ((event == "UNIT_COMBO_POINTS") and (BS_BloodBehaviour == 1)) or ((event == "COMBAT_LOG_EVENT_UNFILTERED") and (BS_BloodBehaviour > 1)) then
+	local unitTarget,powerType = ...
+	if ((event == "UNIT_POWER_FREQUENT") and (BS_BloodBehaviour == 1) and (unitTarget =="player") and (powerType=="COMBO_POINTS")) or ((event == "COMBAT_LOG_EVENT_UNFILTERED") and (BS_BloodBehaviour > 1)) then
 		if (((BS_EnableOnPVP) and (UnitIsPlayer("target"))) or ((BS_EnableOnPVE) and (not UnitIsPlayer("target")))) then
 			local _, eventType, sourceGUID, destGUID, swingDamage, otherDamage, swingCrit, otherCrit
-			if WowBuildInfo >= 40200 then
-				_, eventType, _, sourceGUID, _, _, _, destGUID, _, _, _, swingDamage, _, _, otherDamage, _, _, swingCrit, _, _, otherCrit = ...
+			if CombatLogGetCurrentEventInfo then
+				_, eventType, _, sourceGUID, _, _, _, destGUID, _, _, _, swingDamage, _, _, otherDamage, _, _, swingCrit, _, _, otherCrit = CombatLogGetCurrentEventInfo()
+			elseif WowBuildInfo >= 40200 then
+				_, eventType, _, sourceGUID, _, _, _, destGUID, _, _, _, swingDamage, _, _, otherDamage, _, _, swingCrit, _, _, otherCrit = ... 
 			elseif WowBuildInfo >= 40100 then
 				_, eventType, _, sourceGUID, _, _, destGUID, _, _, _, swingDamage, _, _, otherDamage, _, _, swingCrit, _, _, otherCrit = ...
 			else
