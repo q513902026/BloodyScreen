@@ -18,10 +18,6 @@ function BS_Init()
 	BS_AjustTextureFrame()
 end
 
-local function GetComboPoints(unit)
-	return UnitPower(unit,Enum.PowerType.ComboPoints,true)
-end
-
 --This function handles the used game events.
 function BS_OnEvent(self, event, ...)
 	if (event == "ADDON_LOADED") then
@@ -33,7 +29,7 @@ function BS_OnEvent(self, event, ...)
 	
 	local unitTarget,powerType = ...
 	if ((event == "UNIT_POWER_FREQUENT") and (BS_BloodBehaviour == 1) and (unitTarget =="player") and (powerType=="COMBO_POINTS")) then
-		for i = 0, GetComboPoints("player") - 1 do
+		for i = 0, GetComboPoints("player","target") - 1 do
 			if (not BS_Textures[i]:IsVisible()) then
 				BS_Textures[i]:Show()
 				BS_Texture_OnShow(i, BS_MaximalScalingFactor)
@@ -155,7 +151,7 @@ function BS_Textures_OnUpdate()
 	if (not BS_ConfigFrameOpen) then
 		if (BS_BloodBehaviour == 1) then
 			for i = 0, BS_MaximumTextures - 1 do
-				if ((i >= GetComboPoints("player")) and ((BS_Textures[i]:IsVisible()) and (BS_FadingIterator[i] <= 0))) then
+				if ((i >= GetComboPoints("player","target")) and ((BS_Textures[i]:IsVisible()) and (BS_FadingIterator[i] <= 0))) then
 					BS_FadingIterator[i] = 1
 				end
 			end
